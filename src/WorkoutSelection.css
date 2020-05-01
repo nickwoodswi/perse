@@ -1,0 +1,29 @@
+.select-workout-type{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: purple;
+}
+.workout-selector{
+    width: 120px;
+    height: 70px;
+}
+input{
+    width: 100%;
+}
+.select-workout-type{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select-workout-type-toggle{
+    background-color: yellow;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 120px;
+    height: 70px;
+    margin: 15px;
+}

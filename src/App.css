@@ -1,38 +1,263 @@
-.App {
-  text-align: center;
+header{
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
+    header h1{
+        font-size: 72px;
+        font-style: italic;
+        margin: 0;
+    }
+nav{
+    display: flex;
+    justify-content: space-evenly;
+}
+    .nav-button{
+        display: flex;
+        width: 100px;
+        height: 50px;
+        background-color: yellow;
+        margin: 5px;
+        font-size: 16px;
+        padding: 5px;
+    }
+.about-perse-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    padding: 15px;
+}
+    .about-perse{
+        width: 100%;
+        max-width: 600px;
+    }
+    .perse-summary{
+        font-size: 32px;
+    }
+select{
+    height: 36px;
+    width: 100px;
+}
+input{
+    height: 30px;
+    margin: 0;
+    line-height: 0;
+}
+button{
+    height: 36px;
+    margin-left: 15px;
+}
+h4{
+    margin-bottom: 0;
+}
+.athlete-selection{
+    margin-top: 25px;
+}
+.add-exercise-types{
+    display: flex;
+    margin-bottom: 5px;
+}
+    .add-exercise-type{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 142px;
+        height: 75px;
+        background-color: yellow;
+        margin-right: 5px;
+    }
+    .select-exercise select{
+        width: 290px;
+    }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#ex-name-input{
+    width: 285px;
 }
+.rep-type{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: green;
+}
+    .set-reps{
+        width: 57%;
+        background-color: pink;
+        padding: 15px;
+    }
+        #rep-type{
+            width: 100%;
+        }
+            #rep-number{
+                width: 98.55%;
+            }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.rep-spec{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    background-color: green;
 }
+    .add-weight{
+        width: 150px;
+    }
+    .rep-distance{
+        width: 150px;
+    }
+#weight-number{
+    width: 140px;
+}
+#rep-distance{
+    width: 135px;
+}
+.intensity-spec{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+    .tempo-spec{
+        width: 150px;
+    }
+    .subrest-spec{
+        width: 150px;
+    }
+        .intensity-time-selector{
+            width: 65px;
+        }
+        .intensity-time-input{
+            width: 70px;
+        }
+.rest-spec{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: purple;
+    justify-content: flex-start;
+    padding-left: 25px;
+}
+    .rest-spec-header-container{
+        width: 100%;
+    }
+    .rest-selector{
+        width: 75px;
+    }
+    .rest-input{
+        width: 70px;
+    }
+.date-assignment-container{
+    margin-bottom: 25px;
+}
+.date-type-selectors{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+    .date-type-selector{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 95px;
+        height: 50px;
+        background-color: yellow;
+        font-size: 16px;
+        margin-right: 5px;
+        margin-top: 5px;
+    }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.App{
+    display: flex;
+    flex-wrap: wrap;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+    .assignment-spec{
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+    }
+        .build-exercise{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 15px;
+            background-color: red;
+        }
+            .build-exercise h3{
+                margin-bottom: 5px;
+            }
+        .build-workout{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 15px;
+            background-color: blue;
+        }
+            .sets{
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                align-items: center;
+                background-color: pink;
+                width: 100%;
+            }
+            .assign-workout-button{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 200px;
+                height: 75px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+                background-color: yellow;
+            }
+            .workout{
+                width: 100%;
+                max-width: 530px;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                background-color: orange;
+                margin-left: auto;
+                margin-right: auto;
+            }
+                .assign-workout-headline{
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                }
+                .add-workout{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                    .workout-selector{
+                        width: 120px;
+                        height: 70px;
+                    }
+                    .build-workout-button{
+                        display: flex;
+                        width: 120px;
+                        height: 70px;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: yellow;
+                    }
+                        .build-workout-button-text{
+                            text-align: center;
+                        }
+                .workout h3{
+                    margin-bottom: 5px;
+                }
+            .athlete-selector{
+                width: 100%;
+            }

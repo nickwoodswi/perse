@@ -1,0 +1,29 @@
+.assignment-type{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: purple;
+}
+.athlete-selector{
+    width: 120px;
+    height: 70px;
+}
+input{
+    width: 100%;
+}
+.assignment-type-select{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.assignment-type-toggle{
+    background-color: yellow;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 120px;
+    height: 70px;
+    margin: 15px;
+}

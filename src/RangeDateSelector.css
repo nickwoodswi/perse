@@ -1,0 +1,22 @@
+.date-selector{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.date-selector select{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95px;
+    height: 50px;
+    font-size: 16px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.range-date-divider{
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    background-color: pink;
+    width: 98%;
+}

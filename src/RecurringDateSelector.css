@@ -1,0 +1,14 @@
+.recurrence-selectors{
+    width: 98%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+    .recurrence-selector{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: yellow;
+        width: 70px;
+        height: 50px;
+    }
