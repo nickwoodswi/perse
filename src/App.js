@@ -1,10 +1,24 @@
 //ADD EXERCISE TO WORKOUT
-  //POST a new exercise to 'exercises' table if 'add_exercise_type' is 'select'
-  //Add exercise set to 'sets' in state 
+  //POST a new exercise to 'exercises' table if 'add_exercise_type' is 'create'
+  //An exercise is:
+    //id
+    //name
 //ASSIGN WORKOUT
-  //If no workout dates, check year_/month_/day_start and year_/month_/day_end
+  //POST a new workout to 'workouts' table if 'workout_selection_type' is 'create'
+    //A new workout is:
+      //A name
+      //A list of sets in a specific order
+      //A set is:
+        //An exercise
+        //A multiplier (1+)
+        //Variables for weight, sub distance, tempo, sub rest, and end rest
+  //POST a new athlete to 'athletes' table if 'assign_athlete_type' is 'create'
   //Map through workout_dates
-  //
+  //A workout should be assigned: 
+    //id, 
+    //workout_date, 
+    //workout_id,
+    //athlete_id
 //
 
 
