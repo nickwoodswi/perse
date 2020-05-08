@@ -1,52 +1,12 @@
-//BACK END:
+//ADD EXERCISE TO WORKOUT
+  //POST a new exercise to 'exercises' table if 'add_exercise_type' is 'select'
+  //Add exercise set to 'sets' in state 
+//ASSIGN WORKOUT
+  //If no workout dates, check year_/month_/day_start and year_/month_/day_end
+  //Map through workout_dates
+  //
+//
 
-//*Master Table* contains:
-  //id - Workout identifier
-  //wkt_id - Workout Type ID from *Workout Type Table*
-  //ath_id - Identifier for assigned athlete from *Athletes Table*
-  //date - Workout date
-//ASSIGN WORKOUT button POSTS to this table
-//VIEW WORKOUTS BY ATHLETE route GETS from this table
-
-//*Workout Type Table* contains:
-  //id - Workout type identifier
-  //name - Workout type name
-  //1 column for every Exercise ID
-    //'x' in every Exercise ID column performed
-//SELECT WORKOUT selector GETS from this table
-//ASSIGN WORKOUT button POSTS to this table
-
-//*Exercise* table contains:
-  //id - Exercise identifier
-  //ex_id - Exercise type from *Exercise Types* table
-  //rep_type - 'TO FAILURE' 'SET MULTIPLIER' 'SINGLE DISTANCE'
-  //rep_number - #
-  //weight - #
-  //sub_distance - #
-  //tempo - #
-  //sub_rest - #
-  //rest - #
-//ADD EXERCISE button POSTS to this table
-
-//*Exercise Types* table contains:
-  //id - Exercise type identifier
-  //name - Exercise type name
-//ADD EXERCISE button POSTS to this table
-//SELECT EXERCISE selector GETS from this table
-
-//*Athletes* table contains:
-  //id - Athlete identifier
-  //name - Athlete's name
-  //email - Athlete's email address
-  //phone - Athlete's phone number
-  //address1 - Street Address
-  //address2 - Street 2
-  //city - City
-  //state - State
-  //zip - Postal code
-  //country - Country 
-//ADD ATHLETE button POSTS to this table
-//SELECT ATHLETE selector GETS from this table
 
 import React, { Component } from 'react';
 import './App.css'
@@ -76,6 +36,7 @@ class App extends Component {
           ex_selector: [],
           workout_selection_type: 'select',
           workout_name: '',
+          workout_dates: [],
           assign_athlete_type: 'select',
           selected_athlete: '',
           current_workout: '',
@@ -92,12 +53,14 @@ class App extends Component {
           rest_unit: '',
           rest_time: '',
           sets: [],
-          month_start: '',
-          day_start: '',
-          year_start: '',
-          month_end: '',
-          day_end: '',
-          year_end: ''
+          month_start: 'January',
+          day_start: '1',
+          year_start: '2020',
+          month_end: 'January',
+          day_end: '1',
+          year_end: '2020',
+          recurrance: 1,
+          workout_dates: []
         }
     this.deleteSet = this.deleteSet.bind(this)
     this.moveSet = this.moveSet.bind(this)
@@ -324,15 +287,95 @@ class App extends Component {
 
   handleSingleDate = (startProp, endProp, value) => {
     this.setState({
+      workout_dates: [],
       [startProp]: value,
-      [endProp]: value
+      [endProp]: value,
+      recurrance: 1
+    }, () => {
+      this.recurrance()
     })
   }
 
-  handleRangeDate = (startProp, value) => {
+  handleRangeDate = (dateProp, value) => {
+    this.setState({
+      workout_dates: [],
+      [dateProp]: value,
+      recurrance: 1
+    }, () => {
+      this.recurrance()
+    })
+  }
+
+  handleRecurringDate = (dateProp, value) => {
+    this.setState({
+      workout_dates: [],
+      [dateProp]: value
+    }, () => {
+      this.recurrance()
+    })
+  }
+
+  setRecurrance = (startProp, value) => {
+    this.setState({workout_dates: []})
     this.setState({
       [startProp]: value,
+    }, () => {
+      this.recurrance()
     })
+  }
+
+  recurrance() {
+    
+    const Months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ]
+
+    let startDate = new Date(
+                          this.state.year_start, 
+                          Months.indexOf(this.state.month_start), 
+                          this.state.day_start)
+
+    let endDate = new Date(
+                        this.state.year_end, 
+                        Months.indexOf(this.state.month_end), 
+                        this.state.day_end)
+
+    let dateCount = (endDate.getTime() - startDate.getTime())/(1000*60*60*24)
+    
+    
+    let dates = [];
+    if (startDate === endDate) {
+      dates.push(startDate)
+    } else {
+
+        //Create array of all dates in range
+        let dateRange = []
+        for (let i = 0; i <= dateCount; i++) {
+          let start = new Date(this.state.year_start, Months.indexOf(this.state.month_start), this.state.day_start) 
+          let current = new Date(start.setDate(start.getDate() + i))
+          dateRange.push(current)
+        }
+
+        //Create array of all dates in recurrance
+        let workoutDates = []
+        for (let i = 0; i <= dateRange.length; i+=this.state.recurrance) {
+            workoutDates.push(dateRange[i])
+        }
+
+        this.setState({workout_dates: [...this.state.workout_dates, workoutDates]})
+
+      }
   }
 
   render() {
@@ -354,43 +397,50 @@ class App extends Component {
       <Route path='/assign-workout'>
       <main className='App'>
         <div className="workout">
-            <div className='assign-workout-headline'><h2>ASSIGN WORKOUT</h2></div>
+          <div className='assign-workout-headline'><h2>ASSIGN WORKOUT</h2></div>
             <div className="workout-selector-container">
               <div className="add-workout">
-                  <WorkoutSelection 
-                    type={this.state.workout_selection_type}
-                    selectorOptions={this.state.workouts}
-                    define={e => this.setState({ workout_name: e.target.value })}
-                    name={this.state.workout_name}
-                    changeWorkoutType={this.changeWorkoutType}
-                    updateWorkout={this.updateSets}
-                    />
+                <WorkoutSelection 
+                  type={this.state.workout_selection_type}
+                  selectorOptions={this.state.workouts}
+                  define={e => this.setState({ workout_name: e.target.value })}
+                  name={this.state.workout_name}
+                  changeWorkoutType={this.changeWorkoutType}
+                  updateWorkout={this.updateSets} />
               </div>
               <div className="athlete-selection">
-                <h3>To Athlete:</h3>
-                    <AthleteSelection 
+                <div className="athlete-selection-headline"><h3>To Athlete:</h3></div>
+                <div className="select-athlete">
+                  <AthleteSelection 
                       type={this.state.assign_athlete_type}
                       selectorOptions={this.state.athletes} 
                       define={e => this.setState({ selected_athlete: e.target.value })}
                       name={this.state.selected_athlete}
                       changeAthleteAssignmentType={this.changeAthleteAssignmentType}
                       />
+                </div>
               </div>
-              <h3>On Date(s):</h3>
+              <div className="select-dates">
+                <h3>On Date(s):</h3>
                 <div className='date-type-selectors'>
                   <NavLink to='/assign-workout/single'><div 
                     id='single' 
                     className='date-type-selector'
+                    onClick={e => this.setState({ workout_dates: [] })}
                   >SINGLE</div></NavLink>
                   <NavLink to='/assign-workout/range'><div 
                     id='range' 
                     className='date-type-selector'
+                    onClick={e => this.setState({ workout_dates: [] })}
                   >RANGE</div></NavLink>
                   <NavLink to='/assign-workout/recurring'><div 
                     id='recurring' 
                     className='date-type-selector'
+                    onClick={e => this.setState({ workout_dates: [] })}
                   >RECURRING</div></NavLink>
                 </div>
+              </div>
+              
               <div className='date-assignment-container'>
                 <Route path='/assign-workout/single'>
                   <div 
@@ -418,9 +468,20 @@ class App extends Component {
                   </div>
                 </Route>
                 <Route path='/assign-workout/recurring'>
-                <div 
-                  id='recurring-date-assignment'
-                  className='date-assignment'><RecurringDateSelector /></div>
+                  <div 
+                    id='recurring-date-assignment'
+                    className='date-assignment'>
+                      <RecurringDateSelector 
+                        setRecurrance={this.setRecurrance}
+                        recurrance={this.state.recurrance} 
+                        selectedStartMonth={this.state.month_start} 
+                        selectedStartDay={this.state.day_start} 
+                        selectedStartYear={this.state.year_start} 
+                        selectedEndMonth={this.state.month_end} 
+                        selectedEndDay={this.state.day_end} 
+                        selectedEndYear={this.state.year_end} 
+                        handleRecurringDate={this.handleRecurringDate} />
+                  </div>
                 </Route>
               </div>
             </div>
@@ -512,15 +573,17 @@ class App extends Component {
             </div>
             
             <div className="rest-spec">
-              <div className="rest-spec-header-container"><h3>Rest:</h3></div>
-              <select className="rest-selector" onChange={e => this.setState({ rest_unit: e.target.value })}>
-                <option>NONE</option>
-                <option>Sec</option>
-                <option>Minute</option>
-                <option>Hour</option>
-              </select>
-              <input className="rest-input" type="number" value={this.state.rest_time} placeholder="10" onChange={e => this.setState({ rest_time: e.target.value })} />
-            <button onClick={e => this.convertTempoToSec()}>ADD EXERCISE</button>
+              <div className="rest-editor">
+                <div className="rest-spec-header-container"><h3>Rest:</h3></div>
+                <select className="rest-selector" onChange={e => this.setState({ rest_unit: e.target.value })}>
+                  <option>NONE</option>
+                  <option>Sec</option>
+                  <option>Minute</option>
+                  <option>Hour</option>
+                </select>
+                <input className="rest-input" type="number" value={this.state.rest_time} placeholder="10" onChange={e => this.setState({ rest_time: e.target.value })} />
+              </div>
+              <button id="add-exercise-button" onClick={e => this.convertTempoToSec()}>ADD EXERCISE</button>
             </div>
           
           </div>

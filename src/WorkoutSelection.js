@@ -32,12 +32,10 @@ class WorkoutSelection extends Component {
                         type="text" 
                         value={this.props.name} 
                         placeholder="New Workout Name" />
-                    <div className="select-workout-type">
-                        OR
-                        <div 
-                            className="select-workout-type-toggle"
-                            onClick={e => this.props.changeWorkoutType('select')}>SELECT WORKOUT</div>
-                    </div>
+                    OR
+                    <div 
+                        className="select-workout-type-toggle"
+                        onClick={e => this.props.changeWorkoutType('select')}>SELECT WORKOUT</div>
                 </div>
                 </>
             )

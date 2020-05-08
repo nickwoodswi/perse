@@ -1,7 +1,7 @@
 .recurrence-selectors{
     width: 98%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 5px;
 }
     .recurrence-selector{
@@ -11,4 +11,14 @@
         background-color: yellow;
         width: 70px;
         height: 50px;
+        margin-left: 5px
     }
+.recurrence-indicator{
+    width: 95%;
+    margin-top: 5px;
+    text-align: center;
+    background-color: red;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+}

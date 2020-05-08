@@ -1,19 +1,39 @@
+@media all and (max-width: 550px) {
+    .set {
+        background-color: lightgreen !important;
+        justify-content: flex-end !important;
+    }
+}
 .set{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     width: 100%;
     align-items: center;
     background-color: green;
-    margin: 2px;
+    margin-top: 2px;
 }
+    @media all and (max-width: 550px) {
+        .exercise-summary{
+            width: 100%
+        }
+    }
+    .exercise-summary{
+        display: flex;
+        background-color: red;
+    }
     .set-spec{
         width: 100%;
         padding: 5px;
     }
     .set-edit-buttons{
         display: flex;
-
+        margin-top: 5px;
     }
         .move-set-button{
+            width: 60px;
             margin: 0;
-            width: 70px;
+        }
+        .delete-set-button{
+            margin: 0;
         }

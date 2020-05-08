@@ -1,7 +1,8 @@
 .ex-indicator{
-    width: 43%;
+    width: 100%;
     background-color: purple;
     padding: 15px;
+    text-align: center;
 }
 h4{
     margin: 0;

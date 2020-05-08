@@ -10,16 +10,19 @@ header{
     }
 nav{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
     .nav-button{
         display: flex;
-        width: 100px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 85px;
         height: 50px;
         background-color: yellow;
         margin: 5px;
         font-size: 16px;
-        padding: 5px;
+        padding: 10px;
     }
 .about-perse-container{
     width: 100%;
@@ -35,15 +38,6 @@ nav{
     .perse-summary{
         font-size: 32px;
     }
-select{
-    height: 36px;
-    width: 100px;
-}
-input{
-    height: 30px;
-    margin: 0;
-    line-height: 0;
-}
 button{
     height: 36px;
     margin-left: 15px;
@@ -52,6 +46,12 @@ h4{
     margin-bottom: 0;
 }
 .athlete-selection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+}
+.select-dates{
     margin-top: 25px;
 }
 .add-exercise-types{
@@ -67,29 +67,29 @@ h4{
         background-color: yellow;
         margin-right: 5px;
     }
-    .select-exercise select{
-        width: 290px;
-    }
 
 #ex-name-input{
     width: 285px;
 }
 .rep-type{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    background-color: green;
+    background-color: gold;
 }
     .set-reps{
-        width: 57%;
+        width: 300px;
+        margin-bottom: 15px;
         background-color: pink;
-        padding: 15px;
     }
         #rep-type{
-            width: 100%;
+            width: 175px;
+            height: 36px;
         }
             #rep-number{
-                width: 98.55%;
+                width: 110px;
+                height: 30px
             }
 
 .rep-spec{
@@ -101,48 +101,73 @@ h4{
 }
     .add-weight{
         width: 150px;
+        background-color: yellow;
     }
     .rep-distance{
         width: 150px;
+        background-color: lightgreen
     }
 #weight-number{
     width: 140px;
+    height: 30px;
+    margin-bottom: 10px;
 }
 #rep-distance{
     width: 135px;
+    height: 30px;
+    margin-bottom: 10px;
 }
 .intensity-spec{
     display: flex;
     justify-content: center;
     width: 100%;
+    margin-top: 10px;
 }
     .tempo-spec{
         width: 150px;
+        background-color: gold;
     }
     .subrest-spec{
         width: 150px;
     }
         .intensity-time-selector{
             width: 65px;
+            height: 36px;
         }
         .intensity-time-input{
             width: 70px;
+            height: 30px;
         }
 .rest-spec{
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
+    max-width: 300px;
     background-color: purple;
-    justify-content: flex-start;
-    padding-left: 25px;
+    align-items: flex-end;
 }
     .rest-spec-header-container{
         width: 100%;
     }
-    .rest-selector{
-        width: 75px;
+    .rest-editor{
+        background-color: pink;
+        width: 50%;
+        display: flex;
+        flex-wrap: wrap;
     }
-    .rest-input{
-        width: 70px;
+        .rest-selector{
+            width: 65px;
+            height: 36px;
+            margin: 0px;
+        }
+        .rest-input{
+            width: 70px;
+            height: 30px;
+            margin: 0px;
+        }
+    #add-exercise-button{
+        margin-right: 13px;
+        height: 50px;
     }
 .date-assignment-container{
     margin-bottom: 25px;
@@ -150,7 +175,7 @@ h4{
 .date-type-selectors{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
     .date-type-selector{
         display: flex;
@@ -184,7 +209,7 @@ h4{
             margin-left: auto;
             margin-right: auto;
             padding: 15px;
-            background-color: red;
+            background-color: fuchsia;
         }
             .build-exercise h3{
                 margin-bottom: 5px;
@@ -207,6 +232,7 @@ h4{
                 align-items: center;
                 background-color: pink;
                 width: 100%;
+                max-width: 500px;
             }
             .assign-workout-button{
                 display: flex;
@@ -234,12 +260,33 @@ h4{
                     width: 100%;
                     display: flex;
                     justify-content: center;
+                    background-color: yellow;
                 }
-                .add-workout{
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
+                .workout-selector-container{
+                    background-color: pink;
+                    max-width: 380px;
+                    padding: 15px;
                 }
+                    .add-workout{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        background-color: purple;
+                    }
+                    .athlete-selection{
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                        .athlete-selection-headline{
+                            width: 100%;
+                            max-width: 301px;
+                        }
+                        .select-athlete{
+                            width: 100%;
+                            background-color: green;
+                        }
                     .workout-selector{
                         width: 120px;
                         height: 70px;
@@ -258,6 +305,6 @@ h4{
                 .workout h3{
                     margin-bottom: 5px;
                 }
-            .athlete-selector{
-                width: 100%;
-            }
+                .build-exercise{
+                    background-color: green
+                }

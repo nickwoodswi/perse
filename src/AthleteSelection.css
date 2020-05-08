@@ -2,22 +2,18 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    background-color: purple;
-}
-.athlete-selector{
-    width: 120px;
-    height: 70px;
-}
-input{
-    width: 100%;
-}
-.assignment-type-select{
-    display: flex;
-    align-items: center;
     justify-content: center;
+    width: 100%
 }
-
+    .athlete-selector{
+        width: 100%;
+        height: 70px;
+    }
+    .assignment-type input{
+        width: 100%;
+        height: 65px;
+        margin: 0px;
+    }
 .assignment-type-toggle{
     background-color: yellow;
     display: flex;
@@ -25,5 +21,6 @@ input{
     align-items: center;
     width: 120px;
     height: 70px;
-    margin: 15px;
+    margin-left: 15px;
+    margin-top: 5px;
 }

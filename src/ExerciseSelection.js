@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import './ExerciseSelection.css'
 
 class ExerciseSelection extends Component {
     render() {
         if (this.props.type === 'select') {
             return(
-                <select onChange={this.props.setSelectionAsExercise}>
+                <select className="exercise-selector" onChange={this.props.setSelectionAsExercise}>
                     {this.props.selectorOptions.map(option => {
                         return(
                             <option value={option.id}>{option.ex_name}</option>
@@ -16,6 +17,7 @@ class ExerciseSelection extends Component {
         if (this.props.type === 'create') {
             return(
                 <input 
+                    className='exercise-selector'
                     onChange={this.props.define}
                     id="ex-name-input" 
                     type="text" 

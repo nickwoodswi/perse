@@ -32,12 +32,10 @@ class AthleteSelection extends Component {
                         type="text" 
                         value={this.props.name} 
                         placeholder="New Athlete Name" />
-                    <div className="assignment-type-select">
-                        OR
+                    OR
                         <div 
                             className="assignment-type-toggle"
                             onClick={e => this.props.changeAthleteAssignmentType('select')}>SELECT ATHLETE</div>
-                    </div>
                 </div>
                 </>
             )

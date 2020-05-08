@@ -30,7 +30,7 @@ class SingleDateSelector extends Component{
                 <select 
                     key="start-year-selector" 
                     className="year-selector" 
-                    onChange={e => this.props.handleSingleDate('holdyear_start', 'holdyear_end', e.target.value)}>
+                    onChange={e => this.props.handleSingleDate('year_start', 'year_end', e.target.value)}>
                         <option>2020</option>
                         <option>2021</option>
                 </select>
