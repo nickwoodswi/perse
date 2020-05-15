@@ -7,24 +7,15 @@ import Reps from './Reps'
 import Tempo from './Tempo'
 import Rest from './Rest'
 import Subrest from './Subrest'
-import Exercises from './data/Exercises'
 
 class Set extends Component {
     render() {
-        const setExerciseName = []
-        if (!this.props.set.id) {
-            let nameObj = {
-                ex_name: this.props.name
+        let exerciseName = []
+        this.props.exerciseTypes.map(exerciseType => {
+            if (exerciseType.exercise_type_id == this.props.set.exercise_type_id) {
+                exerciseName.push(exerciseType.ex_name)
             }
-            setExerciseName.push(nameObj)
-        }
-        else {
-            Exercises.map(exercise => {
-                if (exercise.id === this.props.set.id) {
-                    setExerciseName.push(exercise)
-                }
-            })
-        }
+        })
         return(
             <div className="set">
                 <div className="exercise-summary">
@@ -35,7 +26,7 @@ class Set extends Component {
                             addSets={this.props.addSets} />
                     </div>
                     <div className="set-spec">
-                        <b>{setExerciseName[0].ex_name}</b> <Reps reptype={this.props.set.rep_type} reps={this.props.set.reps} />
+                        <b>{exerciseName[0]}</b> <Reps reptype={this.props.set.rep_type} reps={this.props.set.reps} />
                         <Weight weight={this.props.set.weight} />
                         <Distance distance={this.props.set.sub_distance} />
                         <Tempo speed={this.props.set.tempo_time} />

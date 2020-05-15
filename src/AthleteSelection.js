@@ -7,10 +7,11 @@ class AthleteSelection extends Component {
             return(
                 <>
                 <div className="assignment-type">
-                    <select className="athlete-selector" onChange={this.props.define}>
+                    <select className="athlete-selector" 
+                        onChange={e => this.props.define(e.target.value, e.target.options[e.target.selectedIndex].attributes.getNamedItem('firstname').nodeValue, e.target.options[e.target.selectedIndex].attributes.getNamedItem('lastname').nodeValue )}>
                         {this.props.selectorOptions.map(option => {
                             return(
-                                <option>{option.first_name} {option.last_name}</option>
+                                <option firstname={option.first_name} lastname={option.last_name} value={option.id}>{option.first_name} {option.last_name}</option>
                             )
                         })}
                     </select>
@@ -27,11 +28,17 @@ class AthleteSelection extends Component {
                 <>
                 <div className="assignment-type">
                     <input 
-                        onChange={this.props.define}
+                        onChange={e => this.props.define(this.props.id, e.target.value, this.props.lastName)}
                         id="assignment-name-input" 
                         type="text" 
-                        value={this.props.name} 
-                        placeholder="New Athlete Name" />
+                        value={this.props.firstName} 
+                        placeholder="First Name" />
+                    <input 
+                        onChange={e => this.props.define(this.props.id, this.props.firstName, e.target.value)}
+                        id="assignment-name-input" 
+                        type="text" 
+                        value={this.props.lastName} 
+                        placeholder="Last Name" />
                     OR
                         <div 
                             className="assignment-type-toggle"

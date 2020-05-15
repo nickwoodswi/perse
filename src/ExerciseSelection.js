@@ -8,7 +8,7 @@ class ExerciseSelection extends Component {
                 <select className="exercise-selector" onChange={this.props.setSelectionAsExercise}>
                     {this.props.selectorOptions.map(option => {
                         return(
-                            <option value={option.id}>{option.ex_name}</option>
+                            <option value={option.exercise_type_id}>{option.ex_name}</option>
                         )
                     })}
                 </select>

@@ -9,7 +9,7 @@ const Workouts = [
         name: 'Arms',
         sets: [
             {
-                id: 4,
+                exercise_type_id: 4,
                 set_num: 4,
                 rep_type: 'SET MULTIPLE',
                 reps: 10,
@@ -20,7 +20,7 @@ const Workouts = [
                 rest_time: 60
             },
             {
-                id: 7,
+                exercise_type_id: 7,
                 set_num: 1,
                 rep_type: 'TO FAILURE',
                 reps: null,
@@ -31,7 +31,7 @@ const Workouts = [
                 rest_time: 60
             },
             {
-                id: 10,
+                exercise_type_id: 10,
                 set_num: 4,
                 rep_type: 'SET MULTIPLE',
                 reps: 10,
@@ -42,7 +42,7 @@ const Workouts = [
                 rest_time: 60
             },
             {
-                id: 11,
+                exercise_type_id: 11,
                 set_num: 4,
                 rep_type: 'SET MULTIPLE',
                 reps: 10,
@@ -59,7 +59,7 @@ const Workouts = [
         name: 'Legs',
         sets: [
             {
-                id: 2,
+                exercise_type_id: 2,
                 set_num: 1,
                 rep_type: 'SINGLE DISTANCE (m)',
                 reps: 200,
@@ -70,7 +70,7 @@ const Workouts = [
                 rest_time: 120
             },
             {
-                id: 5,
+                exercise_type_id: 5,
                 set_num: 1,
                 rep_type: 'SET MULTIPLE',
                 reps: 5,
@@ -81,7 +81,7 @@ const Workouts = [
                 rest_time: 120
             },
             {
-                id: 8,
+                exercise_type_id: 8,
                 set_num: 4,
                 rep_type: 'SET MULTIPLE',
                 reps: 10,
@@ -92,7 +92,7 @@ const Workouts = [
                 rest_time: 120
             },
             {
-                id: 8,
+                exercise_type_id: 8,
                 set_num: 2,
                 rep_type: 'TO FAILURE',
                 reps: 10,
@@ -109,7 +109,7 @@ const Workouts = [
         name: 'Core',
         sets: [
             {
-                id: 3,
+                exercise_type_id: 3,
                 set_num: 4,
                 rep_type: 'SET MULTIPLE',
                 reps: 30,
@@ -120,7 +120,7 @@ const Workouts = [
                 rest_time: 60
             },
             {
-                id: 7,
+                exercise_type_id: 7,
                 set_num: 4,
                 rep_type: 'SET MULTIPLE',
                 reps: 15,
@@ -131,7 +131,7 @@ const Workouts = [
                 rest_time: 60
             },
             {
-                id: 9,
+                exercise_type_id: 9,
                 set_num: 4,
                 rep_type: 'SET MULTIPLE',
                 reps: 10,
@@ -148,7 +148,7 @@ const Workouts = [
         name: 'Cardio',
         sets: [
             {
-                id: 5,
+                exercise_type_id: 5,
                 set_num: 1,
                 rep_type: 'SET MULTIPLE',
                 reps: 4,
@@ -159,7 +159,7 @@ const Workouts = [
                 rest_time: null
             },
             {
-                id: 6,
+                exercise_type_id: 6,
                 set_num: 1,
                 rep_type: 'TIME (min)',
                 reps: 30,
@@ -176,7 +176,7 @@ const Workouts = [
         name: 'Exhaustion',
         sets: [
             {
-                id: 6,
+                exercise_type_id: 6,
                 set_num: 1,
                 rep_type: 'TIME (min)',
                 reps: 30,
@@ -187,7 +187,7 @@ const Workouts = [
                 rest_time: null
             },
             {
-                id: 3,
+                exercise_type_id: 3,
                 set_num: 1,
                 rep_type: 'TO FAILURE',
                 reps: null,
@@ -198,7 +198,7 @@ const Workouts = [
                 rest_time: null
             },
             {
-                id: 9,
+                exercise_type_id: 9,
                 set_num: 1,
                 rep_type: 'SET MULTIPLE',
                 reps: 10,
@@ -209,7 +209,7 @@ const Workouts = [
                 rest_time: null
             },
             {
-                id: 4,
+                exercise_type_id: 4,
                 set_num: 1,
                 rep_type: 'SET MULTIPLE',
                 reps: 4,
@@ -220,7 +220,7 @@ const Workouts = [
                 rest_time: null
             },
             {
-                id: 5,
+                exercise_type_id: 5,
                 set_num: 1,
                 rep_type: 'SET MULTIPLE',
                 reps: 5,

@@ -1,27 +1,3 @@
-//ADD EXERCISE TO WORKOUT
-  //POST a new exercise to 'exercises' table if 'add_exercise_type' is 'create'
-  //An exercise is:
-    //id
-    //name
-//ASSIGN WORKOUT
-  //POST a new workout to 'workouts' table if 'workout_selection_type' is 'create'
-    //A new workout is:
-      //A name
-      //A list of sets in a specific order
-      //A set is:
-        //An exercise
-        //A multiplier (1+)
-        //Variables for weight, sub distance, tempo, sub rest, and end rest
-  //POST a new athlete to 'athletes' table if 'assign_athlete_type' is 'create'
-  //Map through workout_dates
-  //A workout should be assigned: 
-    //id, 
-    //workout_date, 
-    //workout_id,
-    //athlete_id
-//
-
-
 import React, { Component } from 'react';
 import './App.css'
 import Set from './Set'
@@ -38,6 +14,9 @@ import Workouts from './data/Workouts.js'
 import Exercises from './data/Exercises.js'
 import Athletes from './data/Athletes.js'
 import About from './About'
+import uuid from 'react-uuid'
+import config from './config'
+const API_URL=config.API_URL
 
 class App extends Component {
 
@@ -45,17 +24,27 @@ class App extends Component {
     super()
     this.state = 
         {
+          //data
           athletes: [],
           workouts: [],
           ex_selector: [],
+
+          //workout
           workout_selection_type: 'select',
           workout_name: '',
-          workout_dates: [],
+          selected_workout_id: '',
+          sets: [],
+
+          //athlete
           assign_athlete_type: 'select',
-          selected_athlete: '',
-          current_workout: '',
+          selected_athlete_firstname: '',
+          selected_athlete_lastname: '',
+          selected_athlete_id: '',
+
+          //exercises
           add_exercise_type: 'select',
           ex_name: 'EXERCISE NAME',
+          selected_exercise_type_id: '',
           rep_type: 'TO FAILURE',
           reps: 1,
           weight: '',
@@ -66,7 +55,8 @@ class App extends Component {
           subrest_time: '',
           rest_unit: '',
           rest_time: '',
-          sets: [],
+
+          //dates
           month_start: 'January',
           day_start: '1',
           year_start: '2020',
@@ -74,7 +64,7 @@ class App extends Component {
           day_end: '1',
           year_end: '2020',
           recurrance: 1,
-          workout_dates: []
+          workout_dates: [new Date(2020, 0, 1)]
         }
     this.deleteSet = this.deleteSet.bind(this)
     this.moveSet = this.moveSet.bind(this)
@@ -82,23 +72,39 @@ class App extends Component {
     this.changeAthleteAssignmentType = this.changeAthleteAssignmentType.bind(this)
     this.changeWorkoutType = this.changeWorkoutType.bind(this)
     this.updateSets = this.updateSets.bind(this)
+    this.changeAthleteId = this.changeAthleteId.bind(this)
+    this.assignWorkout = this.assignWorkout.bind(this)
   }
 
   componentDidMount() {
     this.setState({athletes: Athletes})
+      //GET from table 'athletes' --> id, first_name, last_name
     this.setState({workouts: Workouts})
+      //GET from table 'workouts' --> id, wkt_name, sets
+        //'sets' references records from table 'sets' --> id, exercise_id, set_num, sub_distance, subrest_time, tempo_time, weight
+          //'exercise_id' references table 'exercises' --> id, name
     this.setState({ex_selector: Exercises})
   }
 
   updateSets(workoutId) {
+
     let updatedSets = []
-    this.state.workouts[workoutId].sets.map(set => {
-      updatedSets.push(set)
+    let workoutName = []
+
+    this.state.workouts.map(workout => {
+      if (workout.id == workoutId) {
+        workoutName.push(workout.name)
+        workout.sets.map(set => {
+          updatedSets.push(set)
+        })
+      }
     })
     this.setState({
       sets: updatedSets,
-      workout_name: this.state.workouts[workoutId].name
+      workout_name: workoutName[0],
+      selected_workout_id: workoutId
     })
+
   }
 
   deleteSet(setId) {
@@ -109,7 +115,8 @@ class App extends Component {
       }
     })
     this.setState({
-      sets: updatedSets
+      sets: updatedSets,
+      workout_selection_type: 'create'
     })
   }
 
@@ -122,24 +129,24 @@ class App extends Component {
       if (this.state.sets.indexOf(set) === setId) {
         updatedSets.push(
           {
-            id: targetSet.id,
-            ex_id: targetSet.ex_name,
+            exercise_type_id: targetSet.exercise_type_id,
             rep_type: targetSet.rep_type,
             reps: targetSet.reps,
             weight: targetSet.weight,
             sub_distance: targetSet.sub_distance,
-            tempo_unit: targetSet.tempo_unit,
             tempo_time: targetSet.tempo_time,
-            subrest_unit: targetSet.subrest_unit,
             subrest_time: targetSet.subrest_time,
-            rest_unit: targetSet.rest_unit,
             rest_time: targetSet.rest_time,
             set_num: numberOfSets
           }
         )
       }
     })
-    this.setState({sets: updatedSets})
+    this.setState({
+      sets: updatedSets,
+      workout_selection_type: 'create',
+      selected_workout_id: uuid()
+    })
   }
 
   moveSet(setId, indexEdit) {
@@ -184,33 +191,75 @@ class App extends Component {
     previousSets.map(set => { updatedSets.push(set) })
     subsSets.map(set => { updatedSets.push(set) })
 
-    this.setState({sets: updatedSets})
+    this.setState({
+      sets: updatedSets,
+      workout_selection_type: 'create',
+      selected_workout_id: uuid()
+    })
 
   }
 
   changeAthleteAssignmentType(type) {
-    if (type === 'select') {
-      this.setState({
-        selected_athlete: '',
-        assign_athlete_type: type })
-    }
+  
     if (type === 'create') {
-      this.setState({assign_athlete_type: type})
+      this.setState({
+        assign_athlete_type: type,
+        selected_athlete_firstname: '',
+        selected_athlete_lastname: '',
+        selected_athlete_id: uuid(),
+      })
     }
+
+    if (type === 'select')
+      this.setState({
+        assign_athlete_type: type,
+        selected_athlete_firstname: '',
+        selected_athlete_lastname: '',
+        selected_athlete_id: ''
+      })
+    
   }
 
   changeWorkoutType(type) {
+    console.log(type)
     if (type === 'select') {
       this.setState({
-        selected_workout: '',
-        workout_selection_type: type })
+        sets: [],
+        workout_selection_type: type,
+        selected_workout_id: '',
+        workout_name: ''
+         })
     }
     if (type === 'create') {
       this.setState({
         sets: [],
-        workout_selection_type: type
+        workout_selection_type: type,
+        selected_workout_id: uuid(),
+        workout_name: ''
       })
     }
+  }
+
+  //POST new exercise if in 'create' mode
+  submitNewExercise() {
+    if (this.state.add_exercise_type === 'create') {
+      if (!this.state.ex_name) {
+        return alert('No exercise specified!')
+      } else {
+        console.log('new exercise type created')
+        let newExerciseType = {
+          exercise_type_id: this.state.selected_exercise_type_id,
+          ex_name: this.state.ex_name
+        }
+        this.setState({
+          ex_selector: [...this.state.ex_selector, newExerciseType],
+
+        }, 
+          this.setState({ add_exercise_type: 'select', selected_exercise_type_id: '', workout_selection_type: 'create'}) 
+          )
+        this.convertTempoToSec()
+      }
+    } else {this.convertTempoToSec()}
   }
 
   convertTempoToSec() {
@@ -245,10 +294,9 @@ class App extends Component {
 
   convertRestToSec(tempoMultiplier, subrestMultiplier) {
     if (!this.state.rest_unit || this.state.rest_unit == 'Sec') {
-      let newEx =
+      let set =
         {
-          id: '',
-          ex_name: this.state.ex_name,
+          exercise_type_id: this.state.selected_exercise_type_id,
           rep_type: this.state.rep_type,
           reps: this.state.reps,
           weight: this.state.weight,
@@ -258,44 +306,80 @@ class App extends Component {
           rest_time: this.state.rest_time,
           set_num: 1
         }
-      this.setState({sets: [...this.state.sets, newEx]})
+      this.setState({
+        sets: [...this.state.sets, set],
+        ex_name: '',
+        selected_exercise_id: '',
+        rep_type: 'TO FAILURE',
+        reps: 1,
+        weight: '',
+        sub_distance: '',
+        tempo_unit: '',
+        tempo_time: '',
+        subrest_unit: '',
+        subrest_time: '',
+        rest_unit: '',
+        rest_time: ''
+      })
     }
 
     if (this.state.rest_unit == 'Minute') {
-      let newEx =
+      let set =
         {
-          ex_name: this.state.ex_name,
+          exercise_type_id: this.state.selected_exercise_type_id,
           rep_type: this.state.rep_type,
           reps: this.state.reps,
           weight: this.state.weight,
           sub_distance: this.state.sub_distance,
-          tempo_unit: this.state.tempo_unit,
           tempo_time: this.state.tempo_time * tempoMultiplier,
-          subrest_unit: this.state.subrest_unit,
           subrest_time: this.state.subrest_time * subrestMultiplier,
-          rest_unit: this.state.rest_unit,
-          rest_time: this.state.rest_time * 60,
+          rest_time: this.state.rest_time*60,
           set_num: 1
         }
-      this.setState({sets: [...this.state.sets, newEx]})
+      this.setState({
+        sets: [...this.state.sets, set],
+        ex_name: '',
+        selected_exercise_id: '',
+        rep_type: 'TO FAILURE',
+        reps: 1,
+        weight: '',
+        sub_distance: '',
+        tempo_unit: '',
+        tempo_time: '',
+        subrest_unit: '',
+        subrest_time: '',
+        rest_unit: '',
+        rest_time: ''
+      })
     }
     if (this.state.rest_unit == 'Hour') {
-      let newEx = 
+      let set = 
         {
-          ex_name: this.state.ex_name,
+          exercise_type_id: this.state.selected_exercise_type_id,
           rep_type: this.state.rep_type,
           reps: this.state.reps,
           weight: this.state.weight,
           sub_distance: this.state.sub_distance,
-          tempo_unit: this.state.tempo_unit,
           tempo_time: this.state.tempo_time * tempoMultiplier,
-          subrest_unit: this.state.subrest_unit,
           subrest_time: this.state.subrest_time * subrestMultiplier,
-          rest_unit: this.state.rest_unit,
-          rest_time: this.state.rest_time * 360,
+          rest_time: this.state.rest_time*360,
           set_num: 1
         }
-      this.setState({sets: [...this.state.sets, newEx]})
+      this.setState({
+        sets: [...this.state.sets, set],
+        ex_name: '',
+        selected_exercise_id: '',
+        rep_type: 'TO FAILURE',
+        reps: 1,
+        weight: '',
+        sub_distance: '',
+        tempo_unit: '',
+        tempo_time: '',
+        subrest_unit: '',
+        subrest_time: '',
+        rest_unit: '',
+        rest_time: ''
+      })
     }
   }
 
@@ -367,7 +451,6 @@ class App extends Component {
 
     let dateCount = (endDate.getTime() - startDate.getTime())/(1000*60*60*24)
     
-    
     let dates = [];
     if (startDate === endDate) {
       dates.push(startDate)
@@ -387,9 +470,191 @@ class App extends Component {
             workoutDates.push(dateRange[i])
         }
 
-        this.setState({workout_dates: [...this.state.workout_dates, workoutDates]})
+        let filteredWorkoutDates = workoutDates.filter(function(x) {
+          return x !== undefined;
+        })
+
+        this.setState({workout_dates: filteredWorkoutDates})
 
       }
+  }
+
+  changeAthleteId(id, firstName, lastName) {
+    this.setState({
+      selected_athlete_id: id,
+      selected_athlete_firstname: firstName,
+      selected_athlete_lastname: lastName
+    })
+  }
+
+  assignWorkout() {
+    console.log('assignWorkout listening')
+
+    if (this.state.workout_dates.length == 0) {
+      alert('No workout dates selected!')
+      return
+    }
+
+    //if new athlete, add athlete to database
+
+    let newAthletePost = []
+    if (this.state.assign_athlete_type === 'create') {
+      if (
+        !this.state.selected_athlete_firstname ||
+        !this.state.selected_athlete_lastname ) {
+        return alert('Athlete first and last name required!')
+      } else { 
+        let newAthlete = {
+          id: this.state.selected_athlete_id,
+          first_name: this.state.selected_athlete_firstname,
+          last_name: this.state.selected_athlete_lastname
+        }
+        //POST new athlete to database
+        newAthletePost.push(newAthlete)
+      }
+    }
+
+    //if new workout, add workout to database
+
+    let newWorkoutPost = []
+    if (this.state.workout_selection_type === 'create') {
+      if (!this.state.workout_name) {
+        return alert('No workout specified!')
+      } else { 
+        let newWorkoutType = {
+          id: this.state.selected_workout_id,
+          workout_name: this.state.workout_name
+        }
+        this.setState({
+          selected_workout_id: newWorkoutType.id
+        }, () => newWorkoutPost.push(newWorkoutType))
+      }
+    }
+
+    //map over sets (exercises), and add each to database
+    
+    let newExercises = []
+    let newJoinEntries = []
+    if (!this.state.sets) {
+      return alert('No exercise specified!')
+    } else {
+      this.state.sets.map(set => {
+
+        let exercise = {
+          id: uuid(),
+          exercise_type: set.exercise_type_id,
+          rep_type: set.rep_type,
+          reps: set.reps,
+          resistance: set.weight,
+          sub_distance: set.sub_distance,
+          tempo: set.tempo_time,
+          subrest: set.subrest_time,
+          rest: set.rest_time,
+          set_num: set.set_num,
+          order: this.state.sets.indexOf(set)
+        }
+        newExercises.push(exercise)
+        
+        let joinEntry = {
+          id: uuid(),
+          workouts_id: this.state.selected_workout_id,
+          exercises_id: exercise.id
+        }
+        newJoinEntries.push(joinEntry)
+
+      })
+    }
+
+    //map over workout dates and copy over workout id
+
+
+    this.state.workout_dates.map(workoutDate => {
+      if ((workoutDate.getTime() - new Date().getTime) < 0) {
+        return alert('One or more of your date assignments is in the past!')
+      }
+    })
+
+    let newAssignments = []
+    this.state.workout_dates.map(workoutDate => {
+
+      if ((workoutDate.getTime() - new Date()) < 0) {
+        alert('One or more of your assignment dates is in the past!')
+        return
+      }
+
+      let assignment = {
+        id: uuid(),
+        date_assigned: new Date(),
+        perform_on_date: workoutDate,
+        athlete_id: this.state.selected_athlete_id,
+        workouts_id: this.state.selected_workout_id
+      }
+      newAssignments.push(assignment)
+
+    })
+
+    console.log(`new assignments:`, newAssignments)
+    console.log(`new exercises:`, newExercises)
+    console.log(`new exercises:`, newJoinEntries)
+    console.log(`new workout:`, newWorkoutPost)
+    console.log(`new athlete:`, newAthletePost)
+
+    newAthletePost.map(athlete => {
+      fetch(`${API_URL}/athletes`, {
+        method: 'POST',
+        body: JSON.stringify(athlete),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
+    })
+
+    newWorkoutPost.map(workout => {
+      fetch(`${API_URL}/workouts`, {
+        method: 'POST',
+        body: JSON.stringify(workout),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
+    })
+    
+    newJoinEntries.map(entry => {
+      fetch(`${API_URL}/assignments`, {
+        method: 'POST',
+        body: JSON.stringify(entry),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
+    })
+    
+    newExercises.map(exercise => {
+      fetch(`${API_URL}/exercises`, {
+        method: 'POST',
+        body: JSON.stringify(exercise),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
+    })
+
+    newAssignments.map(assignment => {
+      fetch(`${API_URL}/assignments`, {
+        method: 'POST',
+        body: JSON.stringify(assignment),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
+    })
+      
+
   }
 
   render() {
@@ -417,7 +682,7 @@ class App extends Component {
                 <WorkoutSelection 
                   type={this.state.workout_selection_type}
                   selectorOptions={this.state.workouts}
-                  define={e => this.setState({ workout_name: e.target.value })}
+                  define={e => this.setState({ workout_name: e.target.text, selected_workout_id: e.target.options[e.target.selectedIndex].value })}
                   name={this.state.workout_name}
                   changeWorkoutType={this.changeWorkoutType}
                   updateWorkout={this.updateSets} />
@@ -426,12 +691,14 @@ class App extends Component {
                 <div className="athlete-selection-headline"><h3>To Athlete:</h3></div>
                 <div className="select-athlete">
                   <AthleteSelection 
-                      type={this.state.assign_athlete_type}
-                      selectorOptions={this.state.athletes} 
-                      define={e => this.setState({ selected_athlete: e.target.value })}
-                      name={this.state.selected_athlete}
-                      changeAthleteAssignmentType={this.changeAthleteAssignmentType}
-                      />
+                    id={this.state.selected_athlete_id}
+                    type={this.state.assign_athlete_type}
+                    selectorOptions={this.state.athletes} 
+                    define={this.changeAthleteId}
+                    firstName={this.state.selected_athlete_firstname}
+                    lastName={this.state.selected_athlete_lastname}
+                    changeAthleteAssignmentType={this.changeAthleteAssignmentType}
+                    />
                 </div>
               </div>
               <div className="select-dates">
@@ -508,16 +775,19 @@ class App extends Component {
                   <Set 
                     key={idx}
                     id={idx}
+                    exerciseTypes={this.state.ex_selector}
                     set={set}
-                    name={this.state.ex_name}
+                    newExerciseName={this.state.ex_name}
+                    addExerciseType={this.state.add_exercise_type}
                     moveSet={this.moveSet}
                     deleteSet={this.deleteSet}
                     addSets={this.addSets} />
                 )
               })}
-              <div className="assign-workout-button">
+              <div className="assign-workout-button"
+                onClick={this.assignWorkout}>
                 ASSIGN WORKOUT<br />
-                to {this.state.selected_athlete}
+                to {this.state.selected_athlete_firstname} {this.state.selected_athlete_lastname}
               </div>
             </div>
           </div>
@@ -526,19 +796,19 @@ class App extends Component {
             <div className='add-exercise-types'>
               <div 
                 className='add-exercise-type'
-                onClick={e => this.setState({add_exercise_type: 'select', ex_name: ''})}>
+                onClick={e => this.setState({add_exercise_type: 'select', ex_name: '', selected_exercise_id: ''})}>
                   SELECT EXERCISE</div>
               <div 
                 className='add-exercise-type'
-                onClick={e => this.setState({add_exercise_type: 'create'})}>
+                onClick={e => this.setState({add_exercise_type: 'create', ex_name: '', selected_exercise_id: uuid()})}>
                   CREATE EXERCISE</div>
             </div>
             <div className='select-exercise'>
                     <ExerciseSelection  
                       type={this.state.add_exercise_type}
                       selectorOptions={this.state.ex_selector} 
-                      setSelectionAsExercise={e => this.setState({ ex_name: e.target.options[e.target.selectedIndex].text })}
-                      define={e => this.setState({ ex_name: e.target.value })} 
+                      setSelectionAsExercise={e => this.setState({ ex_name: e.target.options[e.target.selectedIndex].text, selected_exercise_type_id: e.target.options[e.target.selectedIndex].value })}
+                      define={e => this.setState({ ex_name: e.target.value, selected_exercise_type_id: uuid() })} 
                       name={this.state.ex_name} />
             </div>
             <h2>EXERCISE SPEC</h2>
@@ -597,7 +867,7 @@ class App extends Component {
                 </select>
                 <input className="rest-input" type="number" value={this.state.rest_time} placeholder="10" onChange={e => this.setState({ rest_time: e.target.value })} />
               </div>
-              <button id="add-exercise-button" onClick={e => this.convertTempoToSec()}>ADD EXERCISE</button>
+              <button id="add-exercise-button" onClick={e => this.submitNewExercise()}>ADD EXERCISE</button>
             </div>
           
           </div>
