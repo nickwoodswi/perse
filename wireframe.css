@@ -3,11 +3,17 @@ main{
     flex-wrap: wrap;
 }
 .header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 200px;
     background-color: white
 }
 .nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 50px;
     background-color: grey
@@ -15,70 +21,116 @@ main{
 .assign{
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     width: 100%;
-    background-color: red
 }
     .assignment-header{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         max-width: 600px;
         height: 75px;
-        background-color: green
+        margin-left: auto;
+        margin-right: auto;
     }
     .workout-selector{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         max-width: 600px;
-        height: 300px;
-        background-color: yellow
+        height: 100px;
+        background-color: rgba(0, 0, 0, .2);
+        margin-left: auto;
+        margin-right: auto;
     }
     .athlete-selector{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         max-width: 600px;
-        height: 300px;
-        background-color: purple;
+        height: 100px;
+        background-color: rgba(0, 0, 0, .3);
+        margin-left: auto;
+        margin-right: auto;
     }
     .date-selector{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         max-width: 600px;
         height: 300px;
-        background-color: orange;
+        background-color: rgba(0, 0, 0, 0.4);
+        margin-left: auto;
+        margin-right: auto;
     }
 .workout-cart{
     display: flex;
-    w
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
     height: 200px;
-    background-color: blue
 }
     .exercise-preview{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         max-width: 600px;
-        height: 200px;
-        background-color: pink;
+        height: 500px;
+        background-color: rgba(0,0,0,.5);
+        margin-left: auto;
+        margin-right: auto;
     }
     .assign-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         max-width: 600px;
         height: 200px;
-        background-color: lightgreen
+        background-color: rgba(0,0,0,0.6);
+        margin-left: auto;
+        margin-right: auto;
 }
 .exercise{
     width: 100%;
     height: 200px;
-    background-color: lightblue
 }
 .exercise-selector{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 200px;
-    background-color: gold
+    max-width: 600px;
+    height: 100px;
+    background-color: rgba(255,255,255);
+    margin-left: auto;
+    margin-right: auto;
 }
 .exercise-editor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 200px;
-    background-color: fuchsia
+    max-width: 600px;
+    height: 400px;
+    background-color: rgba(0,0,0,0.4);
+    margin-left: auto;
+    margin-right: auto;
 }
 .exercise-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: 200px;
-    background-color: purple
+    max-width: 600px;
+    height: 100px;
+    background-color: rgba(0,0,0,0.6);
+    margin-right: auto;
+    margin-left: auto;
 }

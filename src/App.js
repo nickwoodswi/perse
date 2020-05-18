@@ -16,6 +16,7 @@ import Athletes from './data/Athletes.js'
 import About from './About'
 import uuid from 'react-uuid'
 import config from './config'
+import ViewWorkouts from './ViewWorkouts'
 const API_URL=config.API_URL
 
 class App extends Component {
@@ -28,6 +29,9 @@ class App extends Component {
           athletes: [],
           workouts: [],
           ex_selector: [],
+          exercises: [],
+          join: [],
+          assignments: [],
 
           //workout
           workout_selection_type: 'select',
@@ -47,14 +51,14 @@ class App extends Component {
           selected_exercise_type_id: '',
           rep_type: 'TO FAILURE',
           reps: 1,
-          weight: '',
-          sub_distance: '',
+          weight: 0,
+          sub_distance: 0,
           tempo_unit: '',
-          tempo_time: '',
+          tempo_time: 0,
           subrest_unit: '',
-          subrest_time: '',
+          subrest_time: 0,
           rest_unit: '',
-          rest_time: '',
+          rest_time: 0,
 
           //dates
           month_start: 'January',
@@ -64,7 +68,10 @@ class App extends Component {
           day_end: '1',
           year_end: '2020',
           recurrance: 1,
-          workout_dates: [new Date(2020, 0, 1)]
+          workout_dates: [new Date(2020, 0, 1)],
+
+          //view
+          viewing_athlete_id: '',
         }
     this.deleteSet = this.deleteSet.bind(this)
     this.moveSet = this.moveSet.bind(this)
@@ -74,16 +81,88 @@ class App extends Component {
     this.updateSets = this.updateSets.bind(this)
     this.changeAthleteId = this.changeAthleteId.bind(this)
     this.assignWorkout = this.assignWorkout.bind(this)
+    this.changeWorkoutName = this.changeWorkoutName.bind(this)
+    this.changeAthleteView = this.changeAthleteView.bind(this)
   }
 
   componentDidMount() {
-    this.setState({athletes: Athletes})
-      //GET from table 'athletes' --> id, first_name, last_name
-    this.setState({workouts: Workouts})
-      //GET from table 'workouts' --> id, wkt_name, sets
-        //'sets' references records from table 'sets' --> id, exercise_id, set_num, sub_distance, subrest_time, tempo_time, weight
-          //'exercise_id' references table 'exercises' --> id, name
-    this.setState({ex_selector: Exercises})
+    //static
+    // this.setState({athletes: Athletes})
+    // this.setState({workouts: Workouts})
+    // this.setState({ex_selector: Exercises})
+
+    fetch(`${API_URL}/athletes`, {
+      method: 'GET',
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ athletes: data })
+    })
+
+    fetch(`${API_URL}/workouts`, {
+      method: 'GET',
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ workouts: data })
+    })
+
+    fetch(`${API_URL}/exercise-types`, {
+      method: 'GET',
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ ex_selector: data })
+    })
+
+    fetch(`${API_URL}/exercises`, {
+      method: 'GET',
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ exercises: data })
+    })
+
+    fetch(`${API_URL}/join`, {
+      method: 'GET',
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ join: data })
+    })
+
+    fetch(`${API_URL}/assignments`, {
+      method: 'GET',
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ assignments: data })
+    })
+
   }
 
   updateSets(workoutId) {
@@ -129,7 +208,8 @@ class App extends Component {
       if (this.state.sets.indexOf(set) === setId) {
         updatedSets.push(
           {
-            exercise_type_id: targetSet.exercise_type_id,
+            exercise_types_id: targetSet.exercise_types_id,
+            exercise_types_name: targetSet.exercise_types_name,
             rep_type: targetSet.rep_type,
             reps: targetSet.reps,
             weight: targetSet.weight,
@@ -240,24 +320,34 @@ class App extends Component {
     }
   }
 
+  changeWorkoutName(value) {
+    this.setState({
+      workout_name: value
+    })
+  }
+
   //POST new exercise if in 'create' mode
   submitNewExercise() {
     if (this.state.add_exercise_type === 'create') {
       if (!this.state.ex_name) {
         return alert('No exercise specified!')
       } else {
-        console.log('new exercise type created')
+        
         let newExerciseType = {
-          exercise_type_id: this.state.selected_exercise_type_id,
-          ex_name: this.state.ex_name
+          exercise_types_id: this.state.selected_exercise_type_id,
+          exercise_types_name: this.state.ex_name,
+          new_exercise_type: 'new'
         }
-        this.setState({
-          ex_selector: [...this.state.ex_selector, newExerciseType],
 
-        }, 
+        console.log('new exercise type created:', newExerciseType)
+        
+        this.setState( 
+          { ex_selector: [...this.state.ex_selector, newExerciseType] }, 
           this.setState({ add_exercise_type: 'select', selected_exercise_type_id: '', workout_selection_type: 'create'}) 
-          )
+        )
+        
         this.convertTempoToSec()
+
       }
     } else {this.convertTempoToSec()}
   }
@@ -296,7 +386,8 @@ class App extends Component {
     if (!this.state.rest_unit || this.state.rest_unit == 'Sec') {
       let set =
         {
-          exercise_type_id: this.state.selected_exercise_type_id,
+          exercise_types_id: this.state.selected_exercise_type_id,
+          exercise_types_name: this.state.ex_name,
           rep_type: this.state.rep_type,
           reps: this.state.reps,
           weight: this.state.weight,
@@ -326,7 +417,8 @@ class App extends Component {
     if (this.state.rest_unit == 'Minute') {
       let set =
         {
-          exercise_type_id: this.state.selected_exercise_type_id,
+          exercise_types_id: this.state.selected_exercise_type_id,
+          exercise_types_name: this.state.ex_name,
           rep_type: this.state.rep_type,
           reps: this.state.reps,
           weight: this.state.weight,
@@ -355,7 +447,8 @@ class App extends Component {
     if (this.state.rest_unit == 'Hour') {
       let set = 
         {
-          exercise_type_id: this.state.selected_exercise_type_id,
+          exercise_types_id: this.state.selected_exercise_type_id,
+          exercise_types_name: this.state.ex_name,
           rep_type: this.state.rep_type,
           reps: this.state.reps,
           weight: this.state.weight,
@@ -487,6 +580,10 @@ class App extends Component {
     })
   }
 
+  changeAthleteView(id) {
+    this.setState({ viewing_athlete_id: id })
+  }
+
   assignWorkout() {
     console.log('assignWorkout listening')
 
@@ -505,7 +602,7 @@ class App extends Component {
         return alert('Athlete first and last name required!')
       } else { 
         let newAthlete = {
-          id: this.state.selected_athlete_id,
+          athletes_id: this.state.selected_athlete_id,
           first_name: this.state.selected_athlete_firstname,
           last_name: this.state.selected_athlete_lastname
         }
@@ -522,14 +619,29 @@ class App extends Component {
         return alert('No workout specified!')
       } else { 
         let newWorkoutType = {
-          id: this.state.selected_workout_id,
-          workout_name: this.state.workout_name
+          workouts_id: this.state.selected_workout_id,
+          workouts_name: this.state.workout_name
         }
-        this.setState({
-          selected_workout_id: newWorkoutType.id
-        }, () => newWorkoutPost.push(newWorkoutType))
+        newWorkoutPost.push(newWorkoutType)
+        // this.setState({
+        //   selected_workout_id: newWorkoutType.id
+        // }, () => newWorkoutPost.push(newWorkoutType))
       }
     }
+
+    //add new exercise types to db
+
+    let newExerciseTypes = []
+    this.state.ex_selector.map(type => {
+      if (type.new_exercise_type == 'new') {
+        let newExerciseType = {
+          exercise_types_id: type.exercise_types_id,
+          exercise_types_name: type.exercise_types_name
+        }
+        newExerciseTypes.push(newExerciseType)
+      }
+    })
+
 
     //map over sets (exercises), and add each to database
     
@@ -540,9 +652,11 @@ class App extends Component {
     } else {
       this.state.sets.map(set => {
 
+        let exercisesId = uuid()
+
         let exercise = {
-          id: uuid(),
-          exercise_type: set.exercise_type_id,
+          exercises_id: exercisesId,
+          exercise_types_id: set.exercise_types_id,
           rep_type: set.rep_type,
           reps: set.reps,
           resistance: set.weight,
@@ -551,14 +665,14 @@ class App extends Component {
           subrest: set.subrest_time,
           rest: set.rest_time,
           set_num: set.set_num,
-          order: this.state.sets.indexOf(set)
+          set_order: this.state.sets.indexOf(set)
         }
         newExercises.push(exercise)
         
         let joinEntry = {
           id: uuid(),
           workouts_id: this.state.selected_workout_id,
-          exercises_id: exercise.id
+          exercises_id: exercisesId
         }
         newJoinEntries.push(joinEntry)
 
@@ -586,7 +700,7 @@ class App extends Component {
         id: uuid(),
         date_assigned: new Date(),
         perform_on_date: workoutDate,
-        athlete_id: this.state.selected_athlete_id,
+        athletes_id: this.state.selected_athlete_id,
         workouts_id: this.state.selected_workout_id
       }
       newAssignments.push(assignment)
@@ -595,9 +709,10 @@ class App extends Component {
 
     console.log(`new assignments:`, newAssignments)
     console.log(`new exercises:`, newExercises)
-    console.log(`new exercises:`, newJoinEntries)
+    console.log(`new join entries:`, newJoinEntries)
     console.log(`new workout:`, newWorkoutPost)
     console.log(`new athlete:`, newAthletePost)
+    console.log(`new exercise types:`, newExerciseTypes)
 
     newAthletePost.map(athlete => {
       fetch(`${API_URL}/athletes`, {
@@ -622,7 +737,7 @@ class App extends Component {
     })
     
     newJoinEntries.map(entry => {
-      fetch(`${API_URL}/assignments`, {
+      fetch(`${API_URL}/join`, {
         method: 'POST',
         body: JSON.stringify(entry),
         headers: {
@@ -647,6 +762,17 @@ class App extends Component {
       fetch(`${API_URL}/assignments`, {
         method: 'POST',
         body: JSON.stringify(assignment),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
+    })
+
+    newExerciseTypes.map(type => {
+      fetch(`${API_URL}/exercise-types`, {
+        method: 'POST',
+        body: JSON.stringify(type),
         headers: {
           "Content-Type": "application/json",
         },
@@ -682,7 +808,7 @@ class App extends Component {
                 <WorkoutSelection 
                   type={this.state.workout_selection_type}
                   selectorOptions={this.state.workouts}
-                  define={e => this.setState({ workout_name: e.target.text, selected_workout_id: e.target.options[e.target.selectedIndex].value })}
+                  define={this.changeWorkoutName}
                   name={this.state.workout_name}
                   changeWorkoutType={this.changeWorkoutType}
                   updateWorkout={this.updateSets} />
@@ -873,6 +999,19 @@ class App extends Component {
           </div>
         </div>
       </main>
+      </Route>
+      <Route path='/view-workouts'>
+        <main className='App'>
+          <ViewWorkouts
+            athletes={this.state.athletes}
+            workouts={this.state.workouts}
+            exTypes={this.state.ex_selector}
+            exercises={this.state.exercises}
+            join={this.state.join}
+            assignments={this.state.assignments} 
+            viewingAthleteId={this.state.viewing_athlete_id}
+            changeAthleteView={this.changeAthleteView} />
+        </main>
       </Route>
       </>
     );

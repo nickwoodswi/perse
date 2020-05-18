@@ -12,8 +12,8 @@ class Set extends Component {
     render() {
         let exerciseName = []
         this.props.exerciseTypes.map(exerciseType => {
-            if (exerciseType.exercise_type_id == this.props.set.exercise_type_id) {
-                exerciseName.push(exerciseType.ex_name)
+            if (exerciseType.exercise_types_id == this.props.set.exercise_types_id) {
+                exerciseName.push(exerciseType.exercise_types_name)
             }
         })
         return(
