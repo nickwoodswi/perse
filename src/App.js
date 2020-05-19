@@ -20,6 +20,7 @@ import About from './About'
 import uuid from 'react-uuid'
 import config from './config'
 import ViewWorkouts from './ViewWorkouts'
+import AssignButton from './AssignButton'
 const API_URL=config.API_URL
 
 class App extends Component {
@@ -1003,11 +1004,18 @@ class App extends Component {
                       addSets={this.addSets} />
                   )
               })}
-              <div className="assign-workout-button"
-                onClick={this.assignWorkout}>
-                ASSIGN WORKOUT<br />
-                to {this.state.selected_athlete_firstname} {this.state.selected_athlete_lastname}
-              </div>
+              <AssignButton 
+                dayEnd={this.state.day_end}
+                dayStart={this.state.day_start}
+                monthEnd={this.state.month_end}
+                monthStart={this.state.month_start}
+                recurrance={this.state.recurrance}
+                firstName={this.state.selected_athlete_firstname}
+                lastName={this.state.selected_athlete_lastname}
+                workoutName={this.state.workout_name} 
+                yearEnd={this.state.year_end}
+                yearStart={this.state.year_start}
+                assignWorkout={e => this.assignWorkout()} />
             </div>
           </div>
           <div className='build-exercise'>
@@ -1030,9 +1038,7 @@ class App extends Component {
                       define={e => this.setState({ ex_name: e.target.value, selected_exercise_type_id: uuid() })} 
                       name={this.state.ex_name} />
             </div>
-            <h2>EXERCISE SPEC</h2>
             <div className="rep-type">
-              <ExerciseName name={this.state.ex_name} />
               <div className="set-reps">
                 <h4>Rep Type:</h4>
                   <select id="rep-type" onChange={e => this.setState({ rep_type: e.target.value })}>
