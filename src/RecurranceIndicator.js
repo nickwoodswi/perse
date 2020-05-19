@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 class RecurranceIndicator extends Component {
+    static defaultProps = {
+        recurrance: 1
+      }
     render() {
         if (this.props.recurrance == 0) {
             return(<></>)

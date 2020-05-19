@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import './AddSets.css'
 
 class AddSets extends Component {
+    static defaultProps = {
+        targetSet: {}
+      }
     render() {
         return(
             <input className="set-number-input"

@@ -4,7 +4,7 @@ import RecurranceIndicator from './RecurranceIndicator';
 import { MemoryRouter } from 'react-router-dom'
 import renderer from 'react-test-renderer'
 
-test('renders artist form', () => {
+test('renders RecurranceIndicator component', () => {
     render(<MemoryRouter><RecurranceIndicator /></MemoryRouter>);
 });
 

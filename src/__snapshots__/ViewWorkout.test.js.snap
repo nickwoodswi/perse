@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewWorkout renders the UI as expected 1`] = `
+Array [
+  <h1>
+    ATHLETES
+  </h1>,
+  <select
+    className="athlete-selector"
+    onChange={[Function]}
+  >
+    <option>
+      VIEW WORKOUTS BY ATHLETE
+    </option>
+  </select>,
+  <div
+    className="athlete-workouts"
+  />,
+]
+`;

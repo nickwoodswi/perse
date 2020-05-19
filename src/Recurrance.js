@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 class Recurrance extends Component {
+    static defaultProps = {
+        recurrance: 1
+      }
     render() {
         if (this.props.recurrance == 1) {
             return(<li>>>Every day</li>)

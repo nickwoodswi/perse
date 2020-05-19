@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import Workout from './Workout'
 
 class ViewWorkout extends Component {
+    static defaultProps = {
+        athletes: [],
+        assignments: []
+      }
     render() {
         return(
             <>

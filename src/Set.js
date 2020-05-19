@@ -9,6 +9,10 @@ import Rest from './Rest'
 import Subrest from './Subrest'
 
 class Set extends Component {
+    static defaultProps = {
+        exerciseTypes: [],
+        set: {}
+      }
     render() {
         let exerciseName = []
         this.props.exerciseTypes.map(exerciseType => {

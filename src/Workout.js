@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import Exercises from './Exercises'
 
 class Workout extends Component {
-
+    static defaultProps = {
+        workouts: []
+      }
     render() {
         return(
             this.props.workouts.map(workout => {

@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 class ExerciseType extends Component {
+    static defaultProps = {
+        types: []
+      }
     render() {
         return(
             this.props.types.map(type => {

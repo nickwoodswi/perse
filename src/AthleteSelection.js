@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import './AthleteSelection.css'
 
 class AthleteSelection extends Component {
+    static defaultProps = {
+        type: 'select',
+        selectorOptions: []
+      }
     render() {
         if (this.props.type === 'select') {
             return(

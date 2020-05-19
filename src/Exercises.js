@@ -9,6 +9,9 @@ import ExerciseType from './ExerciseType'
 
 
 class Exercises extends Component {
+    static defaultProps = {
+        join: []
+      }
     render() {
 
         let spec = []

@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom'
 import renderer from 'react-test-renderer'
 
 test('renders AthleteSelection component', () => {
-    render(<MemoryRouter><ArtistForm /></MemoryRouter>);
+    render(<MemoryRouter><AthleteSelection /></MemoryRouter>);
 });
 
 it('AthleteSelection renders the UI as expected', () => {

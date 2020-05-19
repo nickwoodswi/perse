@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 class Reps extends Component {
+    static defaultProps = {
+        reptype: 'Select Rep Type'
+      }
     render() {
         if (this.props.reptype === 'Select Rep Type' || null) {
             return(<> No rep type selected</>)
