@@ -54,9 +54,9 @@ class App extends Component {
           ex_name: '',
           selected_exercise_type_id: '',
           rep_type: 'TO FAILURE',
-          reps: '10',
-          weight: '60',
-          sub_distance: '100',
+          reps: '',
+          weight: '',
+          sub_distance: '',
           tempo_unit: '',
           tempo_time: '',
           subrest_unit: '',
@@ -90,86 +90,86 @@ class App extends Component {
   }
 
   componentDidMount() {
-    //static
-    this.setState({assignments: Assignments})
-    this.setState({athletes: Athletes})
-    this.setState({workouts: Workouts})
-    this.setState({ex_selector: ExerciseTypes})
-    this.setState({exercises: Exercises})
-    this.setState({join: Join})
+    // //static
+    // this.setState({assignments: Assignments})
+    // this.setState({athletes: Athletes})
+    // this.setState({workouts: Workouts})
+    // this.setState({ex_selector: ExerciseTypes})
+    // this.setState({exercises: Exercises})
+    // this.setState({join: Join})
 
-    // //fetch
-    // fetch(`${API_URL}/athletes`, {
-    //   method: 'GET',
-    //   body: JSON.stringify(),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   }
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   this.setState({ athletes: data })
-    // })
+    //fetch
+    fetch(`${API_URL}/athletes`, {
+      method: 'GET',
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ athletes: data })
+    })
 
-    // fetch(`${API_URL}/workouts`, {
-    //   method: 'GET',
-    //   body: JSON.stringify(),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   }
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   this.setState({ workouts: data })
-    // })
+    fetch(`${API_URL}/workouts`, {
+      method: 'GET',
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ workouts: data })
+    })
 
-    // fetch(`${API_URL}/exercise-types`, {
-    //   method: 'GET',
-    //   body: JSON.stringify(),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   }
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   this.setState({ ex_selector: data })
-    // })
+    fetch(`${API_URL}/exercise-types`, {
+      method: 'GET',
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ ex_selector: data })
+    })
 
-    // fetch(`${API_URL}/exercises`, {
-    //   method: 'GET',
-    //   body: JSON.stringify(),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   }
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   this.setState({ exercises: data })
-    // })
+    fetch(`${API_URL}/exercises`, {
+      method: 'GET',
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ exercises: data })
+    })
 
-    // fetch(`${API_URL}/join`, {
-    //   method: 'GET',
-    //   body: JSON.stringify(),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   }
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   this.setState({ join: data })
-    // })
+    fetch(`${API_URL}/join`, {
+      method: 'GET',
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ join: data })
+    })
 
-    // fetch(`${API_URL}/assignments`, {
-    //   method: 'GET',
-    //   body: JSON.stringify(),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   }
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   this.setState({ assignments: data })
-    // })
+    fetch(`${API_URL}/assignments`, {
+      method: 'GET',
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ assignments: data })
+    })
 
   }
 
@@ -751,9 +751,6 @@ class App extends Component {
 
     let newAssignments = this.state.workout_dates.map(workoutDate => {
 
-      //includes
-      //filter
-
       if ((workoutDate.getTime() - new Date()) < 0) {
         alert('One or more of your assignment dates is in the past!')
         return
@@ -778,101 +775,143 @@ class App extends Component {
     console.log(`new athlete:`, newAthletePost)
     console.log(`new exercise types:`, newExerciseTypes)
 
-    //static
-    newAthletePost.map(athlete => {
-      this.setState({athletes: [...this.state.athletes, athlete]})
-    })
-    
+    // //static
     // newAthletePost.map(athlete => {
-    //   fetch(`${API_URL}/athletes`, {
-    //     method: 'POST',
-    //     body: JSON.stringify(athlete),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   .then(response => response.json())
+    //   this.setState({athletes: [...this.state.athletes, athlete]})
     // })
-
-    //static
-    newWorkoutPost.map(workout => {
-      this.setState({workouts: [...this.state.workouts, workout]})
+    
+    newAthletePost.map(athlete => {
+      fetch(`${API_URL}/athletes`, {
+        method: 'POST',
+        body: JSON.stringify(athlete),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
     })
 
+    // //static
     // newWorkoutPost.map(workout => {
-    //   fetch(`${API_URL}/workouts`, {
-    //     method: 'POST',
-    //     body: JSON.stringify(workout),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   .then(response => response.json())
+    //   this.setState({workouts: [...this.state.workouts, workout]})
     // })
 
-    //static
-    newJoinEntries.map(entry => {
-      this.setState({join: [...this.state.join, entry]})
+    newWorkoutPost.map(workout => {
+      fetch(`${API_URL}/workouts`, {
+        method: 'POST',
+        body: JSON.stringify(workout),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
     })
-    
+
+    // //static
     // newJoinEntries.map(entry => {
-    //   fetch(`${API_URL}/join`, {
-    //     method: 'POST',
-    //     body: JSON.stringify(entry),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   .then(response => response.json())
+    //   this.setState({join: [...this.state.join, entry]})
     // })
-
-    //static
-    newExercises.map(exercise => {
-      this.setState({exercises: [...this.state.exercises, exercise]})
-    })
     
+    newJoinEntries.map(entry => {
+      fetch(`${API_URL}/join`, {
+        method: 'POST',
+        body: JSON.stringify(entry),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
+    })
+
+    // //static
     // newExercises.map(exercise => {
-    //   fetch(`${API_URL}/exercises`, {
-    //     method: 'POST',
-    //     body: JSON.stringify(exercise),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   .then(response => response.json())
+    //   this.setState({exercises: [...this.state.exercises, exercise]})
     // })
+    
+    newExercises.map(exercise => {
+      fetch(`${API_URL}/exercises`, {
+        method: 'POST',
+        body: JSON.stringify(exercise),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
+    })
 
     // //static
     // newAssignments.map(assignment => {
     //   this.setState({assignments: [...this.state.assignments, assignment]})
     // })
 
-    // newAssignments.map(assignment => {
-    //   fetch(`${API_URL}/assignments`, {
-    //     method: 'POST',
-    //     body: JSON.stringify(assignment),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   .then(response => response.json())
-    // })
-
-    //static
-    newExerciseTypes.map(type => {
-      this.setState({ex_selector: [...this.state.ex_selector, type]})
+    newAssignments.map(assignment => {
+      fetch(`${API_URL}/assignments`, {
+        method: 'POST',
+        body: JSON.stringify(assignment),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
     })
 
+    // //static
     // newExerciseTypes.map(type => {
-    //   fetch(`${API_URL}/exercise-types`, {
-    //     method: 'POST',
-    //     body: JSON.stringify(type),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //   .then(response => response.json())
+    //   this.setState({ex_selector: [...this.state.ex_selector, type]})
     // })
+
+    newExerciseTypes.map(type => {
+      fetch(`${API_URL}/exercise-types`, {
+        method: 'POST',
+        body: JSON.stringify(type),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(response => response.json())
+      .then(this.setState({
+
+         //workout
+         workout_selection_type: 'select',
+         workout_name: '',
+         selected_workout_id: '',
+         sets: [],
+
+         //athlete
+         assign_athlete_type: 'select',
+         selected_athlete_firstname: '',
+         selected_athlete_lastname: '',
+         selected_athlete_id: '',
+
+         //exercises
+         add_exercise_type: 'select',
+         ex_name: '',
+         selected_exercise_type_id: '',
+         rep_type: 'TO FAILURE',
+         reps: '',
+         weight: '',
+         sub_distance: '',
+         tempo_unit: '',
+         tempo_time: '',
+         subrest_unit: '',
+         subrest_time: '',
+         rest_unit: '',
+         rest_time: '',
+
+         //dates
+         month_start: 'January',
+         day_start: '1',
+         year_start: '2020',
+         month_end: 'January',
+         day_end: '1',
+         year_end: '2020',
+         recurrance: 1,
+         workout_dates: [new Date(2020, 0, 1)],
+
+         //view
+         viewing_athlete_id: ''
+      }))
+    })
       
 
   }
