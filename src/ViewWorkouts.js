@@ -10,6 +10,7 @@ class ViewWorkout extends Component {
             <select 
                 className="athlete-selector" 
                 onChange={e => this.props.changeAthleteView(e.target.options[e.target.selectedIndex].value)}>
+                    <option>VIEW WORKOUTS BY ATHLETE</option>
                     {this.props.athletes.map((athlete, idx) => {
                         return(
                             <option key={idx} value={athlete.athletes_id}>{athlete.first_name} {athlete.last_name}</option>

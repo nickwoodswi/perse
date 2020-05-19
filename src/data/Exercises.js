@@ -1,51 +1,172 @@
 const Exercises = [
     {
-        exercise_types_id: 0,
-        exercise_types_name: 'SELECT'
-    },
-    {
-        exercise_types_id: 1,
-        exercise_types_name: 'REST'
-    },
-    {
-        exercise_types_id: 2,
-        exercise_types_name: 'Lunge'
-    },
-    {
-        exercise_types_id: 3,
-        exercise_types_name: 'Situp'
-    },
-    {
+        exercises_id: 1,
         exercise_types_id: 4,
-        exercise_types_name: 'Bench Press'
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 2,
+        set_order: 0
     },
     {
-        exercise_types_id: 5,
-        exercise_types_name: 'Sprint'
-    },
-    {
-        exercise_types_id: 6,
-        exercise_types_name: 'Jog'
-    },
-    {
+        exercises_id: 2,
         exercise_types_id: 7,
-        exercise_types_name: 'Pushup'
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 1,
+        set_order: 1
     },
     {
-        exercise_types_id: 8,
-        exercise_types_name: 'Squat'
-    },
-    {
-        exercise_types_id: 9,
-        exercise_types_name: 'Jump'
-    },
-    {
+        exercises_id: 3,
         exercise_types_id: 10,
-        exercise_types_name: 'Curl'
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 3,
+        set_order: 2
     },
     {
+        exercises_id: 4,
         exercise_types_id: 11,
-        exercise_types_name: 'Tricep Extension'
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 1,
+        set_order: 3
+    },
+    {
+        exercises_id: 5,
+        exercise_types_id: 2,
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 4,
+        set_order: 0
+    },
+    {
+        exercises_id: 6,
+        exercise_types_id: 5,
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 5,
+        set_order: 1
+    },
+    {
+        exercises_id: 7,
+        exercise_types_id: 8,
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 2,
+        set_order: 2
+    },
+    {
+        exercises_id: 8,
+        exercise_types_id: 9,
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 6,
+        set_order: 3
+    },
+    {
+        exercises_id: 9,
+        exercise_types_id: 3,
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 7,
+        set_order: 0
+    },
+    {
+        exercises_id: 10,
+        exercise_types_id: 7,
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 3,
+        set_order: 1
+    },
+    {
+        exercises_id: 11,
+        exercise_types_id: 5,
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 1,
+        set_order: 0
+    },
+    {
+        exercises_id: 12,
+        exercise_types_id: 6,
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 3,
+        set_order: 1
+    },
+    {
+        exercises_id: 13,
+        exercise_types_id: 9,
+        rep_type: 'TO FAILURE',
+        reps: 0,
+        resistance: 0,
+        sub_distance: 0,
+        tempo: 0,
+        subrest: 0,
+        rest: 0,
+        set_num: 2,
+        set_order: 2
     }
 ]
 

@@ -61,6 +61,7 @@ class Exercises extends Component {
                         <Tempo speed={exercise.tempo} />
                         <Subrest time={exercise.subrest} />
                         <Rest rest={exercise.rest} />
+                        <br/>
                         </>
                         )
                     })

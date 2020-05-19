@@ -26,7 +26,7 @@ class Set extends Component {
                             addSets={this.props.addSets} />
                     </div>
                     <div className="set-spec">
-                        <b>{exerciseName[0]}</b> <Reps reptype={this.props.set.rep_type} reps={this.props.set.reps} />
+                        <b>{this.props.set.exercise_types_name}</b> <Reps reptype={this.props.set.rep_type} reps={this.props.set.reps} />
                         <Weight weight={this.props.set.weight} />
                         <Distance distance={this.props.set.sub_distance} />
                         <Tempo speed={this.props.set.tempo_time} />

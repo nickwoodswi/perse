@@ -6,6 +6,7 @@ class ExerciseSelection extends Component {
         if (this.props.type === 'select') {
             return(
                 <select className="exercise-selector" onChange={this.props.setSelectionAsExercise}>
+                    <option>SELECT EXERCISE</option>
                     {this.props.selectorOptions.map((option, idx) => {
                         return(
                             <option key={idx} value={option.exercise_types_id}>{option.exercise_types_name}</option>
