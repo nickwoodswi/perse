@@ -758,8 +758,8 @@ class App extends Component {
 
       let assignment = {
         id: uuid(),
-        date_assigned: new Date().toString(),
-        perform_on_date: workoutDate.toString(),
+        date_assigned: new Date(),
+        perform_on_date: workoutDate,
         athletes_id: this.state.selected_athlete_id,
         workouts_id: this.state.selected_workout_id
       }
