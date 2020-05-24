@@ -4,7 +4,9 @@ PERSE is a simple workout assignment and editor app for coaches, personal traine
 
 Create new exercises from scratch by naming a new exercise type and setting intensity by rep type, weight, distance, rest, and tempo, or select from existing exercise types already in the system. Then, either add them to an existing workout, or build a new workout from scratch before assigning. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It also makes use of Express, PostgreSQL, and Node.js.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It also makes use of Express, PostgreSQL, Node.js, Vercel, and Heroku.
+
+## DEMO: https://perse.now.sh/
 
 ## Available Scripts
 
