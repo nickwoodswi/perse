@@ -1,22 +1,57 @@
 .date-selector{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
 }
-.date-selector select{
+.month-selector{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 95px;
+    width: 100%;
     height: 50px;
     font-size: 16px;
     margin-right: 5px;
-    margin-top: 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 2px 2px 2px darkgrey;
+}
+.day-selector{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48%;
+    height: 50px;
+    font-size: 16px;
+    margin-right: 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 2px 2px 2px darkgrey;
+}
+.year-selector{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48%;
+    height: 50px;
+    font-size: 16px;
+    margin-right: 5px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 2px 2px 2px darkgrey;
 }
 .range-date-divider{
     display: flex;
     justify-content: center;
-    margin-top: 5px;
-    background-color: pink;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     width: 98%;
+    font-weight: bold;
+    color: white;
 }

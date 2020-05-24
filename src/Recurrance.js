@@ -6,16 +6,16 @@ class Recurrance extends Component {
       }
     render() {
         if (this.props.recurrance == 1) {
-            return(<li>>>Every day</li>)
+            return(<li><b>EVERY DAY</b></li>)
         }
         if (this.props.recurrance == 2) {
-            return(<li>>>Every other day</li>)
+            return(<li><b>EVERY OTHER DAY</b></li>)
         }
         if (this.props.recurrance == 3) {
-            return(<li>>>Every 3 days</li>)
+            return(<li><b>EVERY THREE DAYS</b></li>)
         }
         if (this.props.recurrance == 7) {
-            return(<li>>>Every week</li>)
+            return(<li><b>EVERY WEEK</b></li>)
         }
     }
 }

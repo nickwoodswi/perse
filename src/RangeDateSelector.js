@@ -33,6 +33,7 @@ class RangeDateSelector extends Component{
                         key="start-year-selector" 
                         className="year-selector" 
                         onChange={e => this.props.handleRangeDate('year_start', e.target.value)}>
+                            <option>SELECT YEAR</option>
                             <option>2020</option>
                             <option>2021</option>
                     </select>

@@ -1,39 +1,69 @@
+html{
+    background: url(./images/gym.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    scroll-behavior: smooth;
+}
+
 header{
     display: flex;
+    align-items: center;
     width: 100%;
-    justify-content: center;
+    padding-left: 5px;
+    background-color: white;
 }
     header h1{
         font-size: 72px;
         font-style: italic;
         margin: 0;
+        padding-top: -10;
+    }
+    #app-logo{
+        height: 96px;
     }
 nav{
+    width: 100%;
     display: flex;
-    justify-content: center;
+    margin-top: 5px;
 }
     .nav-button{
         display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
-        width: 85px;
+        width: 76px;
         height: 50px;
-        background-color: yellow;
+        background-color: white;
+        box-shadow: 2px 0px 10px darkgrey;
         margin: 5px;
         font-size: 16px;
         padding: 10px;
+        border-radius: 5px;
+        cursor: pointer
     }
+        a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .nav-button:active{
+            background-color: red;
+        }
 .about-perse-container{
     width: 100%;
     display: flex;
     justify-content: center;
     margin-bottom: 25px;
-    padding: 15px;
 }
     .about-perse{
         width: 100%;
         max-width: 600px;
+        background-color: white;
+        padding: 25px;
+        margin: 5px;
     }
     .perse-summary{
         font-size: 32px;
@@ -54,6 +84,11 @@ h4{
 .select-dates{
     margin-top: 25px;
 }
+    .select-dates h3{
+        color: rgba(255,255,255,0.9);
+        font-size: 14px;
+        font-style: italic;
+    }
 .add-exercise-types{
     display: flex;
     margin-bottom: 5px;
@@ -64,9 +99,14 @@ h4{
         justify-content: center;
         width: 142px;
         height: 75px;
-        background-color: yellow;
+        background-color: white;
         margin-right: 5px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px darkgrey;
     }
+        .add-exercise-type:active{
+            background-color: red;
+        }
 
 #ex-name-input{
     width: 285px;
@@ -76,20 +116,28 @@ h4{
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    background-color: gold;
 }
     .set-reps{
-        width: 300px;
+        width: 295px;
         margin-bottom: 15px;
-        background-color: pink;
     }
         #rep-type{
-            width: 175px;
+            width: 170px;
             height: 36px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            box-shadow: 2px 2px 2px darkgrey;
         }
             #rep-number{
-                width: 110px;
-                height: 30px
+                width: 115px;
+                height: 34px;
+                border-radius: 5px;
+                border: none;
+                margin-left: 2px;
+                font-size: 16px;
+                padding-left: 5px;
+                box-shadow: 2px 2px 2px darkgrey;
             }
 
 .rep-spec{
@@ -97,23 +145,40 @@ h4{
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    background-color: green;
 }
     .add-weight{
-        width: 150px;
-        background-color: yellow;
+        width: 145px;
+        margin-right: 3px;
+        color: rgba(255,255,255,.8);
+        font-style: italic;
     }
+        .add-weight input{
+            border-radius: 5px;
+            border: none;
+            padding-left: 5px;
+            font-size: 16px;
+            box-shadow: 2px 2px 2px darkgrey
+        }
     .rep-distance{
-        width: 150px;
-        background-color: lightgreen
+        width: 143px;
+        color: rgba(255,255,255,0.9);
+        font-style: italic;
     }
+        .rep-distance input{
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            padding-left: 5px;
+            box-shadow: 2px 2px 2px darkgrey;
+            width: 135px !important;
+        }
 #weight-number{
     width: 140px;
     height: 30px;
     margin-bottom: 10px;
 }
 #rep-distance{
-    width: 135px;
+    width: 142px;
     height: 30px;
     margin-bottom: 10px;
 }
@@ -125,69 +190,112 @@ h4{
 }
     .tempo-spec{
         width: 150px;
-        background-color: gold;
+        padding-left: 2px;
+        font-style: italic;
+        color: rgba(255,255,255,0.9)
     }
+        .tempo-spec h4{
+            margin: 0;
+        }
     .subrest-spec{
-        width: 150px;
+        width: 145px;
+        font-style: italic;
+        color: rgba(255,255,255,0.9)
     }
+        .subrest-spec h4{
+            margin: 0;
+        }
         .intensity-time-selector{
-            width: 65px;
+            width: 70px;
             height: 36px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 2px 2px 2px darkgrey;
+            font-size: 16px;
         }
         .intensity-time-input{
-            width: 70px;
-            height: 30px;
+            width: 65px;
+            height: 34px;
+            border-radius: 5px;
+            border: none;
+            margin-left: 3px;
+            box-shadow: 2px 2px 2px darkgrey;
         }
 .rest-spec{
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     max-width: 300px;
-    background-color: purple;
     align-items: flex-end;
 }
     .rest-spec-header-container{
         width: 100%;
     }
     .rest-editor{
-        background-color: pink;
         width: 50%;
         display: flex;
         flex-wrap: wrap;
+        padding-left: 5px;
+        margin-top: 10px;
+        color: rgba(255,255,255,0.9);
+        font-style: italic
     }
+        .rest-editor h3{
+            margin: 0;
+        }
         .rest-selector{
             width: 65px;
             height: 36px;
             margin: 0px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 2px 2px 2px darkgrey;
         }
         .rest-input{
             width: 70px;
-            height: 30px;
+            height: 34px;
             margin: 0px;
+            border-radius: 5px;
+            border: none;
+            margin-left: 5px;
+            box-shadow: 2px 2px 2px darkgrey;
         }
     #add-exercise-button{
+        background-color: white;
         margin-right: 13px;
-        height: 50px;
+        height: 60px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 2px 2px 2px darkgrey;
     }
+        #add-exercise-button:active{
+            background-color: greenyellow
+        }
 .date-assignment-container{
     margin-bottom: 25px;
 }
 .date-type-selectors{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
 }
     .date-type-selector{
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 95px;
+        width: 90px;
         height: 50px;
-        background-color: yellow;
+        background-color: white;
         font-size: 16px;
         margin-right: 5px;
         margin-top: 5px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px darkgrey;
+        
     }
+        .date-type-selector:active{
+            background-color: fuchsia;
+        }
 
 .App{
     display: flex;
@@ -196,8 +304,8 @@ h4{
     .assignment-spec{
         display: flex;
         flex-wrap: wrap;
-        margin-left: auto;
-        margin-right: auto;
+        flex-direction: column;
+        width: 100%;
     }
         .build-exercise{
             width: 100%;
@@ -208,8 +316,6 @@ h4{
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
-            padding: 15px;
-            background-color: fuchsia;
         }
             .build-exercise h3{
                 margin-bottom: 5px;
@@ -219,20 +325,25 @@ h4{
             flex-wrap: wrap;
             justify-content: center;
             width: 100%;
-            max-width: 500px;
+            max-width: 525px;
             margin-left: auto;
             margin-right: auto;
-            padding: 15px;
-            background-color: blue;
+            padding-right: 5px;
+            background-color: rgba(0,0,0,.8);
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
         }
             .sets{
                 display: flex;
                 flex-direction: column;
+                justify-content: center;
                 flex-wrap: wrap;
                 align-items: center;
-                background-color: pink;
+                /* background-color: pink; */
+                margin-left: auto;
+                margin-right: auto;
                 width: 100%;
-                max-width: 500px;
+                padding-bottom: 25px;
             }
             .assign-workout-button{
                 display: flex;
@@ -252,40 +363,54 @@ h4{
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
-                background-color: orange;
+                background-color: rgba(0,0,0,.8);
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
                 margin-left: auto;
                 margin-right: auto;
+                margin-top: 25px;
             }
                 .assign-workout-headline{
                     width: 100%;
                     display: flex;
                     justify-content: center;
-                    background-color: yellow;
+                    background-color: white;
+                    border-top-left-radius: 5px;
+                    border-top-right-radius: 5px;
                 }
                 .workout-selector-container{
-                    background-color: pink;
                     max-width: 380px;
-                    padding: 15px;
+                    padding-top: 15px;
+                    padding-right: 15px;
+                    padding-left: 15px;
                 }
                     .add-workout{
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
-                        background-color: purple;
+                        background-color: rgba(211, 211, 211, 0.95);
+                        padding-bottom: 5px;
+                        border-radius: 5px;
                     }
                     .athlete-selection{
                         display: flex;
                         flex-wrap: wrap;
                         justify-content: space-between;
                         align-items: center;
+                        padding-bottom: 5px;
                     }
                         .athlete-selection-headline{
                             width: 100%;
                             max-width: 301px;
+                            color: rgba(255, 255, 255, 0.9);
+                            font-style: italic;
+                            font-size: 12px;
                         }
                         .select-athlete{
                             width: 100%;
-                            background-color: green;
+                            background-color: rgba(211, 211, 211, 0.9);
+                            padding-bottom: 5px;
+                            border-radius: 5px;
                         }
                     .workout-selector{
                         width: 120px;
@@ -306,5 +431,42 @@ h4{
                     margin-bottom: 5px;
                 }
                 .build-exercise{
-                    background-color: green
+                    /* background-color: green; */
+                    display: flex;
+                }
+                    .display-exercise-builder{
+                        height: 75px;
+                        background-color: rgba(0,0,0,.5);
+                        margin-bottom: 25px;
+                        margin-top: 15px;
+                        padding: 20px;
+                        margin-left: auto;
+                        margin-right: auto;
+                        border-radius: 5px;
+                        border: none;
+                        width: 200px;
+                        font-size: 16px;
+                        color: fuchsia;
+                        cursor: pointer;
+                        font-weight: bold;
+                    }
+                    .exercise-builder-hidden{
+                        display: none;
+                    }
+                    .exercise-builder{
+                        width: 100%;
+                        background-color: rgba(0,0,0,.8);
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        margin-left: auto;
+                        margin-right: auto;
+                        margin-bottom: 25px;
+                        padding-top: 25px;
+                        padding-bottom: 25px;
+                        border-radius: 5px;
+                    }
+                .set-reps h4{
+                    color: rgba(255,255,255,.9);
+                    font-style: italic;
                 }

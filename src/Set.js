@@ -37,20 +37,20 @@ class Set extends Component {
                         <Subrest time={this.props.set.subrest_time} />
                         <Rest rest={this.props.set.rest_time} />
                     </div>
-                </div>
-                <div className="set-edit-buttons">
-                    <button 
-                        onClick={() => this.props.moveSet(this.props.id, -1)}
-                        className="move-set-button">
-                            UP</button>
-                    <button 
-                        onClick={() => this.props.moveSet(this.props.id, 1)}
-                        className="move-set-button">
-                            DOWN</button>
-                    <button 
-                        onClick={() => this.props.deleteSet(this.props.id)} 
-                        className="delete-set-button">
-                            DELETE</button>
+                    <div className="set-edit-buttons">
+                        <button 
+                            onClick={() => this.props.moveSet(this.props.id, -1)}
+                            className="move-set-button">
+                                ↟</button>
+                        <button 
+                            onClick={() => this.props.deleteSet(this.props.id)} 
+                            className="delete-set-button">
+                                DELETE</button>
+                        <button 
+                            onClick={() => this.props.moveSet(this.props.id, 1)}
+                            className="move-set-button">
+                                ↡</button>
+                    </div>
                 </div>
             </div>
         )

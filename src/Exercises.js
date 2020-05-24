@@ -6,6 +6,7 @@ import Tempo from './Tempo'
 import Rest from './Rest'
 import Subrest from './Subrest'
 import ExerciseType from './ExerciseType'
+import './Exercises.css'
 
 
 class Exercises extends Component {
@@ -51,20 +52,23 @@ class Exercises extends Component {
                 orderedExercises.splice(exercise.set_order, 0, exercise)
             }
         })
-        console.log(`exercises:`, orderedExercises)
 
             
                 return (
-                    orderedExercises.map(exercise => {
+                    orderedExercises.map((exercise, idx) => {
                         return(
                         <>
-                        {exercise.sets} set(s) <ExerciseType types={this.props.exTypes} typeId={exercise.type} /> <Reps reptype={exercise.rep_type} reps={exercise.reps} /><br/>
-                        <Weight weight={exercise.weight} />
-                        <Distance distance={exercise.sub_distance} />
-                        <Tempo speed={exercise.tempo} />
-                        <Subrest time={exercise.subrest} />
-                        <Rest rest={exercise.rest} />
-                        <br/>
+                        <div className="view-workout">
+                            <div className="workout-order">{idx + 1}</div>
+                            <div className="exercises">
+                                <div className="exercise-type">{exercise.sets} set(s) <ExerciseType types={this.props.exTypes} typeId={exercise.type} /> <Reps reptype={exercise.rep_type} reps={exercise.reps} /></div>
+                                <Weight weight={exercise.weight} />
+                                <Distance distance={exercise.sub_distance} />
+                                <Tempo speed={exercise.tempo} />
+                                <Subrest time={exercise.subrest} />
+                                <div className="set-rest"><Rest rest={exercise.rest} /></div>
+                            </div>
+                        </div>
                         </>
                         )
                     })

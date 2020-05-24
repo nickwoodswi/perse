@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import MonthDayCounts from './MonthDayCounts'
 import './RecurringDateSelector.css'
-import RecurranceIndicator from './RecurranceIndicator'
 
 class RecurringDateSelector extends Component{
     render() {
@@ -11,23 +10,14 @@ class RecurringDateSelector extends Component{
         return(
             <>
             <div className="range-date-divider">RECURRING EVERY:</div>
-            <div className="recurrence-selectors">
-                <div 
-                    className="recurrence-selector"
-                    onClick={() => this.props.setRecurrance('recurrance', 1)}>DAY</div>
-                <div 
-                    className="recurrence-selector"
-                    onClick={() => this.props.setRecurrance('recurrance', 2)}>2nd DAY</div>
-                <div 
-                    className="recurrence-selector"
-                    onClick={() => this.props.setRecurrance('recurrance', 3)}>3rd DAY</div>
-                <div 
-                    className="recurrence-selector"
-                    onClick={() => this.props.setRecurrance('recurrance', 7)}>WEEK</div>
-            </div>
-            <div className="recurrence-indicator">
-                <RecurranceIndicator 
-                    recurrance={this.props.recurrance} />
+            <div className="recurrence-selector">
+                <select className="recurrence-selector" onChange={e => this.props.setRecurrance('recurrance', e.target.value)}>
+                    <option value="0">SELECT RECURRANCE</option>
+                    <option value="1">DAY</option>
+                    <option value="2">SECOND DAY</option>
+                    <option value="3">THIRD DAY</option>
+                    <option value="7">WEEK</option>
+                </select>
             </div>
             <div className="range-date-divider">STARTING</div>
             <div className="range-date-selector">
@@ -54,6 +44,7 @@ class RecurringDateSelector extends Component{
                         key="start-year-selector" 
                         className="year-selector" 
                         onChange={e => this.props.handleRecurringDate('year_start', e.target.value)}>
+                            <option>SELECT YEAR</option>
                             <option>2020</option>
                             <option>2021</option>
                     </select>
@@ -84,6 +75,7 @@ class RecurringDateSelector extends Component{
                         key="end-year-selector" 
                         className="year-selector" 
                         onChange={e => this.props.handleRecurringDate('year_end', e.target.value)}>
+                            <option>SELECT YEAR</option>
                             <option>2020</option>
                             <option>2021</option>
                     </select>

@@ -13,6 +13,7 @@ class AthleteSelection extends Component {
                 <div className="assignment-type">
                     <select className="athlete-selector" 
                         onChange={e => this.props.define(e.target.value, e.target.options[e.target.selectedIndex].attributes.getNamedItem('firstname').nodeValue, e.target.options[e.target.selectedIndex].attributes.getNamedItem('lastname').nodeValue )}>
+                        <option>SELECT ATHLETE</option>
                         {this.props.selectorOptions.map((option, idx) => {
                             return(
                                 <option key={idx} firstname={option.first_name} lastname={option.last_name} value={option.athletes_id}>{option.first_name} {option.last_name}</option>

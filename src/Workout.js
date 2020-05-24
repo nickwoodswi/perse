@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Exercises from './Exercises'
+import './Workout.css'
 
 class Workout extends Component {
     static defaultProps = {
@@ -11,7 +12,7 @@ class Workout extends Component {
                 if (workout.workouts_id == this.props.workoutId) {
                     return (
                         <>
-                        <h4>{workout.workouts_name}</h4>
+                        <div className="workout-name"><h4>{workout.workouts_name}</h4></div>
                         <Exercises 
                             workoutId={this.props.workoutId}
                             join={this.props.join} 

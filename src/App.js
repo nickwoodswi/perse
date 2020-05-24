@@ -637,6 +637,10 @@ class App extends Component {
     this.setState({ viewing_athlete_id: id })
   }
 
+  displayBuilder() {
+    document.getElementById('exercise-builder-hidden').classList.toggle('exercise-builder')
+}
+
   assignWorkout() {
 
     if (!this.state.workout_name) {
@@ -920,11 +924,12 @@ class App extends Component {
       <>
       <header>
         <div className='header'><h1>PERSE</h1></div>
+        <img id="app-logo" src={require('./images/hanging-knee-raises-crossfit-silhouette.png')} />
       </header>
       <nav>
         <NavLink to='/'><div className='nav-button'>ABOUT</div></NavLink>
-        <NavLink to='/assign-workout'><div className='nav-button'>ASSIGN WORKOUT</div></NavLink>
-        <NavLink to='/view-workouts'><div className='nav-button'>VIEW WORKOUTS</div></NavLink>
+        <NavLink to='/assign-workout'><div className='nav-button'>ASSIGN</div></NavLink>
+        <NavLink to='/view-workouts'><div className='nav-button'>VIEW</div></NavLink>
       </nav>
       <Route path='/' exact>
         <main className='App'>
@@ -976,7 +981,7 @@ class App extends Component {
                     id='recurring' 
                     className='date-type-selector'
                     onClick={e => this.setState({ workout_dates: [] })}
-                  >RECURRING</div></NavLink>
+                  >RECUR</div></NavLink>
                 </div>
               </div>
               
@@ -1027,7 +1032,7 @@ class App extends Component {
         </div>
         <div className="assignment-spec">
           <div className="build-workout">
-            <div className="sets">
+            <div id="sets" className="sets">
               {this.state.sets.map((set, idx) => {
                   return(
                     <Set 
@@ -1057,83 +1062,84 @@ class App extends Component {
             </div>
           </div>
           <div className='build-exercise'>
-            <h2>ADD EXERCISE TO WORKOUT</h2>
-            <div className='add-exercise-types'>
-              <div 
-                className='add-exercise-type'
-                onClick={e => this.setState({add_exercise_type: 'select', ex_name: '', selected_exercise_id: ''})}>
-                  SELECT EXERCISE</div>
-              <div 
-                className='add-exercise-type'
-                onClick={e => this.setState({add_exercise_type: 'create', ex_name: '', selected_exercise_id: uuid()})}>
-                  CREATE EXERCISE</div>
-            </div>
-            <div className='select-exercise'>
-                    <ExerciseSelection  
-                      type={this.state.add_exercise_type}
-                      selectorOptions={this.state.ex_selector} 
-                      setSelectionAsExercise={e => this.setState({ ex_name: e.target.options[e.target.selectedIndex].text, selected_exercise_type_id: e.target.options[e.target.selectedIndex].value })}
-                      define={e => this.setState({ ex_name: e.target.value, selected_exercise_type_id: uuid() })} 
-                      name={this.state.ex_name} />
-            </div>
-            <div className="rep-type">
-              <div className="set-reps">
-                <h4>Rep Type:</h4>
-                  <select id="rep-type" onChange={e => this.setState({ rep_type: e.target.value })}>
-                    <option>Select Rep Type</option>
-                    <option>TO FAILURE</option>
-                    <option>SET MULTIPLE</option>
-                    <option>SINGLE DISTANCE (m)</option>
-                    <option>TIME (min)</option>
+            <button className="display-exercise-builder" onClick={e => this.displayBuilder()}>+ADD EXERCISE TO WORKOUT</button>
+            <div id="exercise-builder-hidden" className="exercise-builder-hidden">
+              <div className='add-exercise-types'>
+                <div 
+                  className='add-exercise-type'
+                  onClick={e => this.setState({add_exercise_type: 'select', ex_name: '', selected_exercise_id: ''})}>
+                    SELECT EXERCISE</div>
+                <div 
+                  className='add-exercise-type'
+                  onClick={e => this.setState({add_exercise_type: 'create', ex_name: '', selected_exercise_id: uuid()})}>
+                    CREATE EXERCISE</div>
+              </div>
+              <div className='select-exercise'>
+                      <ExerciseSelection  
+                        type={this.state.add_exercise_type}
+                        selectorOptions={this.state.ex_selector} 
+                        setSelectionAsExercise={e => this.setState({ ex_name: e.target.options[e.target.selectedIndex].text, selected_exercise_type_id: e.target.options[e.target.selectedIndex].value })}
+                        define={e => this.setState({ ex_name: e.target.value, selected_exercise_type_id: uuid() })} 
+                        name={this.state.ex_name} />
+              </div>
+              <div className="rep-type">
+                <div className="set-reps">
+                  <h4>Rep Type:</h4>
+                    <select id="rep-type" onChange={e => this.setState({ rep_type: e.target.value })}>
+                      <option>Select Rep Type</option>
+                      <option>TO FAILURE</option>
+                      <option>SET MULTIPLE</option>
+                      <option>SINGLE DISTANCE (m)</option>
+                      <option>TIME (min)</option>
+                    </select>
+                    <input id="rep-number" type="number" value={this.state.reps} placeholder="10" onChange={e => this.setState({ reps: e.target.value })} />
+                </div>
+              </div>
+              <div className="rep-spec">
+                <div className="add-weight">
+                  <h4>Add Weight (kg):</h4><input id="weight-number" type="number" value={this.state.weight} placeholder="60" onChange={e => this.setState({ weight: e.target.value })} />
+                </div>
+                <div className="rep-distance">
+                  <h4>Sub Distance (m):</h4><input id="rep-distance" type="number" value={this.state.distance} placeholder="400" onChange={e => this.setState({ sub_distance: e.target.value })} />
+                </div>
+                <div className="intensity-spec">
+                  <div className="tempo-spec">
+                    <h4>Tempo (reps/time):</h4>
+                      <select className="intensity-time-selector" onChange={e => this.setState({ tempo_unit: e.target.value })}>
+                        <option>NONE</option>
+                        <option>Sec</option>
+                        <option>Minute</option>
+                        <option>Hour</option>
+                      </select>
+                      <input className="intensity-time-input" type="number" value={this.state.tempo_time} placeholder="10" onChange={e => this.setState({ tempo_time: e.target.value })} />
+                  </div>
+                  <div className="subrest-spec">
+                    <h4>Sub Rest (sec):</h4>
+                      <select className="intensity-time-selector" onChange={e => this.setState({ subrest_unit: e.target.value })}>
+                        <option>NONE</option>
+                        <option>Sec</option>
+                        <option>Minute</option>
+                        <option>Hour</option>
+                      </select>
+                    <input className="intensity-time-input" type="number" value={this.state.subrest_time} placeholder="10" onChange={e => this.setState({ subrest_time: e.target.value })} />
+                  </div>
+                </div>
+              </div>
+              
+              <div className="rest-spec">
+                <div className="rest-editor">
+                  <div className="rest-spec-header-container"><h3>Rest:</h3></div>
+                  <select className="rest-selector" onChange={e => this.setState({ rest_unit: e.target.value })}>
+                    <option>NONE</option>
+                    <option>Sec</option>
+                    <option>Minute</option>
+                    <option>Hour</option>
                   </select>
-                  <input id="rep-number" type="number" value={this.state.reps} placeholder="10" onChange={e => this.setState({ reps: e.target.value })} />
-              </div>
-            </div>
-            <div className="rep-spec">
-              <div className="add-weight">
-                <h4>Add Weight (kg):</h4><input id="weight-number" type="number" value={this.state.weight} placeholder="60" onChange={e => this.setState({ weight: e.target.value })} />
-              </div>
-              <div className="rep-distance">
-                <h4>Sub Distance (m):</h4><input id="rep-distance" type="number" value={this.state.distance} placeholder="400" onChange={e => this.setState({ sub_distance: e.target.value })} />
-              </div>
-              <div className="intensity-spec">
-                <div className="tempo-spec">
-                  <h4>Tempo (reps/time):</h4>
-                    <select className="intensity-time-selector" onChange={e => this.setState({ tempo_unit: e.target.value })}>
-                      <option>NONE</option>
-                      <option>Sec</option>
-                      <option>Minute</option>
-                      <option>Hour</option>
-                    </select>
-                    <input className="intensity-time-input" type="number" value={this.state.tempo_time} placeholder="10" onChange={e => this.setState({ tempo_time: e.target.value })} />
+                  <input className="rest-input" type="number" value={this.state.rest_time} placeholder="10" onChange={e => this.setState({ rest_time: e.target.value })} />
                 </div>
-                <div className="subrest-spec">
-                  <h4>Sub Rest (sec):</h4>
-                    <select className="intensity-time-selector" onChange={e => this.setState({ subrest_unit: e.target.value })}>
-                      <option>NONE</option>
-                      <option>Sec</option>
-                      <option>Minute</option>
-                      <option>Hour</option>
-                    </select>
-                  <input className="intensity-time-input" type="number" value={this.state.subrest_time} placeholder="10" onChange={e => this.setState({ subrest_time: e.target.value })} />
-                </div>
+                <a href="#sets"><button id="add-exercise-button" onClick={e => this.submitNewExercise()}>ADD EXERCISE</button></a>
               </div>
             </div>
-            
-            <div className="rest-spec">
-              <div className="rest-editor">
-                <div className="rest-spec-header-container"><h3>Rest:</h3></div>
-                <select className="rest-selector" onChange={e => this.setState({ rest_unit: e.target.value })}>
-                  <option>NONE</option>
-                  <option>Sec</option>
-                  <option>Minute</option>
-                  <option>Hour</option>
-                </select>
-                <input className="rest-input" type="number" value={this.state.rest_time} placeholder="10" onChange={e => this.setState({ rest_time: e.target.value })} />
-              </div>
-              <button id="add-exercise-button" onClick={e => this.submitNewExercise()}>ADD EXERCISE</button>
-            </div>
-          
           </div>
         </div>
       </main>

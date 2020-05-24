@@ -1,39 +1,47 @@
-@media all and (max-width: 550px) {
-    .set {
-        background-color: lightgreen !important;
-        justify-content: flex-end !important;
-    }
-}
 .set{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
+    justify-content: center;
     align-items: center;
-    background-color: green;
     margin-top: 2px;
+    width: 100%;
 }
-    @media all and (max-width: 550px) {
-        .exercise-summary{
-            width: 100%
-        }
-    }
     .exercise-summary{
         display: flex;
-        background-color: red;
-    }
-    .set-spec{
+        align-items: center;
         width: 100%;
-        padding: 5px;
+        background-color: rgba(0,0,0,.8);
+        padding: 2px;
     }
-    .set-edit-buttons{
-        display: flex;
-        margin-top: 5px;
-    }
-        .move-set-button{
-            width: 60px;
-            margin: 0;
+        .set-spec{
+            margin-left: 10px;
+            color: white;
         }
-        .delete-set-button{
-            margin: 0;
+        .set-edit-buttons{
+            display: flex;
+            flex-direction: column;
+            margin-left: auto;
+            align-items: center;
         }
+            .delete-set-button{
+                margin: 0;
+                border-radius: 20px;
+                border: none;
+                background-color: black;
+                border: 1px solid darkgrey;
+                color: darkgrey;
+                cursor: pointer;
+            }
+            .move-set-button{
+                margin: 1px;
+                background-color: black;
+                color: darkgrey;
+                border-radius: 35px;
+                border: 1px solid darkgrey;
+                width: 35px;
+                cursor: pointer;
+            }
+                .move-set-button:active{
+                    background-color: white;
+                    color: black;
+                }

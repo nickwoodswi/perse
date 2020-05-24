@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './About.css'
 
 class About extends Component {
     render() {
@@ -16,7 +17,7 @@ class About extends Component {
 
                 <p>Perse was originally built with ReactJS for Mike Woods, a former Olympic speedskater and current youth speedskating coach for U.S. Speedskating.</p>
 
-                <p>©2020 Nick Woods, nick.woods.wi@gmail.com</p>
+                <p><i>©2020 Nick Woods, <a href="mailto:nick.woods.wi@gmail.com">nick.woods.wi@gmail.com</a></i></p>
                 </div>
             </div>
             </>
