@@ -343,7 +343,6 @@ class App extends Component {
   }
 
   changeWorkoutType(type) {
-    console.log(type)
     if (type === 'select') {
       this.setState({
         sets: [],
@@ -391,8 +390,6 @@ class App extends Component {
           exercise_types_name: this.state.ex_name,
           new_exercise_type: 'new'
         }
-
-        console.log('new exercise type created:', newExerciseType)
         
         this.setState( 
           { ex_selector: [...this.state.ex_selector, newExerciseType] }, 
@@ -770,13 +767,6 @@ class App extends Component {
       
     })
     this.setState({assignments: [...this.state.assignments, ...newAssignments]})
-
-    console.log(`new assignments:`, newAssignments)
-    console.log(`new exercises:`, newExercises)
-    console.log(`new join entries:`, newJoinEntries)
-    console.log(`new workout:`, newWorkoutPost)
-    console.log(`new athlete:`, newAthletePost)
-    console.log(`new exercise types:`, newExerciseTypes)
 
     // //static
     // newAthletePost.map(athlete => {
