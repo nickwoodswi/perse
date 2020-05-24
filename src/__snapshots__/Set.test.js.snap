@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Set component renders the UI as expected 1`] = `
+<div
+  className="set"
+>
+  <div
+    className="exercise-summary"
+  >
+    <div
+      className="set-number"
+    >
+      <input
+        className="set-number-input"
+        onChange={[Function]}
+        type="number"
+      />
+    </div>
+    <div
+      className="set-spec"
+    >
+      <b />
+       
+       No rep type selected
+      <div
+        className="set-rest"
+      >
+        <i>
+          (No rest after set)
+        </i>
+      </div>
+    </div>
+    <div
+      className="set-edit-buttons"
+    >
+      <button
+        className="move-set-button"
+        onClick={[Function]}
+      >
+        ↟
+      </button>
+      <button
+        className="delete-set-button"
+        onClick={[Function]}
+      >
+        DELETE
+      </button>
+      <button
+        className="move-set-button"
+        onClick={[Function]}
+      >
+        ↡
+      </button>
+    </div>
+  </div>
+</div>
+`;

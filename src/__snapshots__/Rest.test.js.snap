@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rest component renders the UI as expected 1`] = `
+<div
+  className="set-rest"
+>
+  <i>
+    (No rest after set)
+  </i>
+</div>
+`;

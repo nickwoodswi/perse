@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AthleteSelection renders the UI as expected 1`] = `
+<div
+  className="assignment-type"
+>
+  <select
+    className="athlete-selector"
+    onChange={[Function]}
+  >
+    <option>
+      SELECT ATHLETE
+    </option>
+  </select>
+  OR
+  <div
+    className="assignment-type-toggle"
+    onClick={[Function]}
+  >
+    +ADD NEW ATHLETE
+  </div>
+</div>
+`;
