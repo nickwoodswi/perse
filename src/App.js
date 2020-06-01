@@ -89,15 +89,19 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // uncomment code to use static data for testing
     // //static
-    // this.setState({assignments: Assignments})
-    // this.setState({athletes: Athletes})
-    // this.setState({workouts: Workouts})
-    // this.setState({ex_selector: ExerciseTypes})
-    // this.setState({exercises: Exercises})
-    // this.setState({join: Join})
+    // // this.setState({assignments: Assignments})
+    // // this.setState({athletes: Athletes})
+    // // this.setState({workouts: Workouts})
+    // // this.setState({ex_selector: ExerciseTypes})
+    // // this.setState({exercises: Exercises})
+    // // this.setState({join: Join})
 
-    //fetch
+  //fetches
+
+    //gets previously-entered athletes (id, name) from the database and puts them in state
+      //used to make assignments
     fetch(`${API_URL}/athletes`, {
       method: 'GET',
       body: JSON.stringify(),
@@ -110,6 +114,8 @@ class App extends Component {
       this.setState({ athletes: data })
     })
 
+    //gets previously-entered workout types (id, name) from the database and puts them in state
+      //used to assign previously-entered workouts
     fetch(`${API_URL}/workouts`, {
       method: 'GET',
       body: JSON.stringify(),
@@ -122,6 +128,8 @@ class App extends Component {
       this.setState({ workouts: data })
     })
 
+    //gets previously-entered exercise types (id, name) from the database and puts them in state
+      //used to create new exercises
     fetch(`${API_URL}/exercise-types`, {
       method: 'GET',
       body: JSON.stringify(),
@@ -134,6 +142,8 @@ class App extends Component {
       this.setState({ ex_selector: data })
     })
 
+    //gets previously-entered exercises (id, exercise_type, variables) from the database and puts them in state
+      //used to create new workouts from a "template", or preview workout assignments
     fetch(`${API_URL}/exercises`, {
       method: 'GET',
       body: JSON.stringify(),
@@ -146,6 +156,8 @@ class App extends Component {
       this.setState({ exercises: data })
     })
 
+    //gets all entries in the workout-exercise type join table
+      //used to display previously-stored workouts, and save relationship between workout and exercises when creating new workouts
     fetch(`${API_URL}/join`, {
       method: 'GET',
       body: JSON.stringify(),
@@ -172,24 +184,30 @@ class App extends Component {
 
   }
 
+  //adds exercises to workout cart when previously-submitted workout is selected
   updateSets(workoutId) {
 
+    //initializes the selected workout name
     let workoutName = []
-
+    //map over the workouts in state and set the workout name when it matches the selected id
     this.state.workouts.map(workout => {
       if (workout.workouts_id == workoutId) {
         workoutName.push(workout.workouts_name)
       }
     })
 
+    //initializes a list of exercise ids in the selected workout
     let exerciseIds = []
+    //maps over the join entries and creates a list of exercise entries that match the selected workout id
     this.state.join.map(entry => {
       if (entry.workouts_id == workoutId) {
         exerciseIds.push(entry.exercises_id)
       }
     })
 
+    //initializes a list of exercises
     let exercises = []
+    //maps over the exercise ids list (line 201) and for each item, adds any exercises matching the id in state to the list of exercises
     exerciseIds.map(id => {
       this.state.exercises.map(exercise => {
         if (id == exercise.exercises_id) {
@@ -198,7 +216,9 @@ class App extends Component {
       })
     })
 
+    //initializes a list of exercise sets in the workout cart
     let updatedSets = []
+    //maps over the list of exercises (line 209), and for each item, adds the exercise to this list
     exercises.map(exercise => {
       this.state.ex_selector.map(type => {
         if (exercise.exercise_types_id == type.exercise_types_id) {
@@ -220,6 +240,7 @@ class App extends Component {
       })
     })
 
+    //sets the updated exercises, workout name, and selected workout id in state to display to the user
     this.setState({
       sets: updatedSets,
       workout_name: workoutName[0],
@@ -228,6 +249,7 @@ class App extends Component {
 
   }
 
+  //removes an exercise set from the workout cart
   deleteSet(setId) {
     let updatedSets = []
     this.state.sets.map(set => {
@@ -235,14 +257,18 @@ class App extends Component {
         updatedSets.push(set)
       }
     })
+    //updates sets in state, and sets the client to "create" mode for the workout
     this.setState({
       sets: updatedSets,
       workout_selection_type: 'create'
     })
   }
 
+  //multiplies a set in the workout cart using left-side number input
   addSets(setId, targetSet, numberOfSets) {
+    //initializes a list of updated sets
     let updatedSets = []
+    //map over the sets currently in state and create a new updated list by changing set_num for the matching set ids
     this.state.sets.map(set => {
       if (this.state.sets.indexOf(set) !== setId) {
         updatedSets.push(set)
@@ -264,6 +290,7 @@ class App extends Component {
         )
       }
     })
+    //updates sets in state, puts client in "create" mode, and creates a new workout ID
     this.setState({
       sets: updatedSets,
       workout_selection_type: 'create',
@@ -271,7 +298,9 @@ class App extends Component {
     })
   }
 
+  //changes set order
   moveSet(setId, indexEdit) {
+    //initializes 
     let previousSets = []
     let subsSets = []
     
@@ -321,6 +350,7 @@ class App extends Component {
 
   }
 
+  //switches client into creating or selecting an athlete assignment
   changeAthleteAssignmentType(type) {
   
     if (type === 'create') {
@@ -342,6 +372,7 @@ class App extends Component {
     
   }
 
+  //switches client into creating a new workout type or assigning an old one
   changeWorkoutType(type) {
     if (type === 'select') {
       this.setState({
@@ -361,6 +392,7 @@ class App extends Component {
     }
   }
 
+  //sets the workout name
   changeWorkoutName(value) {
     this.setState({
       workout_name: value
@@ -402,6 +434,7 @@ class App extends Component {
     } else {this.convertTempoToSec()}
   }
 
+  //converts minutes/hours to seconds if selected for tempo, subrest, and rest
   convertTempoToSec() {
     if (!this.state.tempo_unit || this.state.tempo_unit === 'Sec') {
       let tempoMultiplier = 1
@@ -526,6 +559,7 @@ class App extends Component {
     }
   }
 
+  //sets start and end dates equally if user is assigning a single date
   handleSingleDate = (startProp, endProp, value) => {
     this.setState({
       workout_dates: [],
@@ -537,6 +571,7 @@ class App extends Component {
     })
   }
 
+  //sets start or end dates if user is assigning a range of dates
   handleRangeDate = (dateProp, value) => {
     this.setState({
       workout_dates: [],
@@ -547,6 +582,7 @@ class App extends Component {
     })
   }
 
+  //sets start or end dates if user is assigning a recurrance over a date range
   handleRecurringDate = (dateProp, value) => {
     this.setState({
       workout_dates: [],
@@ -556,6 +592,7 @@ class App extends Component {
     })
   }
 
+  //sets the recurrance if date range has already been set
   setRecurrance = (startProp, value) => {
     this.setState({workout_dates: []})
     this.setState({
@@ -565,6 +602,7 @@ class App extends Component {
     })
   }
 
+  //creates assignment dates when recurrance and date range have been set
   recurrance() {
     
     const Months = [
@@ -582,6 +620,7 @@ class App extends Component {
       'December'
     ]
 
+    //creates start and end date objects by getting an index number from the Months list above using the month listed in state
     let startDate = new Date(
                           this.state.year_start, 
                           Months.indexOf(this.state.month_start), 
@@ -592,9 +631,12 @@ class App extends Component {
                         Months.indexOf(this.state.month_end), 
                         this.state.day_end)
 
+    //counts the number of days between the start date and end date
     let dateCount = (endDate.getTime() - startDate.getTime())/(1000*60*60*24)
     
+    //initializes a list of assignment dates
     let dates = [];
+    //if the start date is the same as the end date, push just the single date into the list of assignment dates
     if (startDate === endDate) {
       dates.push(startDate)
     } else {
@@ -622,6 +664,7 @@ class App extends Component {
       }
   }
 
+  //set the selected athlete in state
   changeAthleteId(id, firstName, lastName) {
     this.setState({
       selected_athlete_id: id,
@@ -630,37 +673,45 @@ class App extends Component {
     })
   }
 
+  //change the athlete being viewed in the "view workouts" view
   changeAthleteView(id) {
     this.setState({ viewing_athlete_id: id })
   }
 
+  //displays the exercise builder when the user opts to add a new exercise to a workout
   displayBuilder() {
     document.getElementById('exercise-builder-hidden').classList.toggle('exercise-builder')
-}
+  }
 
+  //assigns a workout to an athlete on a single date, or range of dates with recurrance
   assignWorkout() {
 
+  //validation
+    //workout name is required
     if (!this.state.workout_name) {
       alert('No workout created or selected!')
       return
     }
     
+    //athlete selection is required
     if (!this.state.selected_athlete_id) {
       alert('No athlete selected!')
       return
     }
 
+    //assignment dates are required
     if (this.state.workout_dates.length == 0) {
       alert('No workout dates selected!')
       return
     }
 
+    //exercises in the workout are required
     if (this.state.sets.length == 0) {
       alert('No exercises selected!')
       return
     }
 
-    //if new athlete, add athlete to database
+    //if new athlete, create a new athlete object for posting to database
 
     let newAthletePost = []
     if (this.state.assign_athlete_type === 'create') {
@@ -674,12 +725,11 @@ class App extends Component {
           first_name: this.state.selected_athlete_firstname,
           last_name: this.state.selected_athlete_lastname
         }
-        //POST new athlete to database
         newAthletePost.push(newAthlete)
       }
     }
 
-    //if new workout, add workout to database
+    //if new workout, create new workout type to add to database
 
     let newWorkoutPost = []
     if (this.state.workout_selection_type === 'create') {
@@ -691,13 +741,10 @@ class App extends Component {
           workouts_name: this.state.workout_name
         }
         newWorkoutPost.push(newWorkoutType)
-        // this.setState({
-        //   selected_workout_id: newWorkoutType.id
-        // }, () => newWorkoutPost.push(newWorkoutType))
       }
     }
 
-    //add new exercise types to db
+    //if new exercise type, create a new exercise type object to add to database
 
     let newExerciseTypes = []
     this.state.ex_selector.map(type => {
@@ -711,7 +758,8 @@ class App extends Component {
     })
 
 
-    //map over sets (exercises), and add each to database
+    //create new exercise spec entries, and add them to the exercises table 
+    //create new join table entries to store relationships between exercises/workout
     
     let newExercises = []
     let newJoinEntries = []
@@ -747,7 +795,7 @@ class App extends Component {
       })
     }
 
-    //map over workout dates and copy over workout id
+    //create an assignment entry for each date in the workout_dates array in state
 
     let newAssignments = this.state.workout_dates.map(workoutDate => {
 
@@ -768,11 +816,14 @@ class App extends Component {
     })
     this.setState({assignments: [...this.state.assignments, ...newAssignments]})
 
-    // //static
-    // newAthletePost.map(athlete => {
-    //   this.setState({athletes: [...this.state.athletes, athlete]})
-    // })
+    // uncomment to use static data for testing
+
+    // // //static
+    // // newAthletePost.map(athlete => {
+    // //   this.setState({athletes: [...this.state.athletes, athlete]})
+    // // })
     
+    //post any new athletes
     newAthletePost.map(athlete => {
       fetch(`${API_URL}/athletes`, {
         method: 'POST',
@@ -789,6 +840,7 @@ class App extends Component {
     //   this.setState({workouts: [...this.state.workouts, workout]})
     // })
 
+    //post an new workouts
     newWorkoutPost.map(workout => {
       fetch(`${API_URL}/workouts`, {
         method: 'POST',
@@ -805,6 +857,7 @@ class App extends Component {
     //   this.setState({join: [...this.state.join, entry]})
     // })
     
+    //post join entries
     newJoinEntries.map(entry => {
       fetch(`${API_URL}/join`, {
         method: 'POST',
@@ -821,6 +874,7 @@ class App extends Component {
     //   this.setState({exercises: [...this.state.exercises, exercise]})
     // })
     
+    //post new exercises
     newExercises.map(exercise => {
       fetch(`${API_URL}/exercises`, {
         method: 'POST',
@@ -837,6 +891,7 @@ class App extends Component {
     //   this.setState({assignments: [...this.state.assignments, assignment]})
     // })
 
+    //post new assignments
     newAssignments.map(assignment => {
       fetch(`${API_URL}/assignments`, {
         method: 'POST',
@@ -853,6 +908,7 @@ class App extends Component {
     //   this.setState({ex_selector: [...this.state.ex_selector, type]})
     // })
 
+    //post new exercise types
     newExerciseTypes.map(type => {
       fetch(`${API_URL}/exercise-types`, {
         method: 'POST',
@@ -862,6 +918,7 @@ class App extends Component {
         },
       })
       .then(response => response.json())
+      //reset state after submission
       .then(this.setState({
 
          //workout

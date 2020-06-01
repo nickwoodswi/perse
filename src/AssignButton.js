@@ -4,6 +4,7 @@ import './AssignButton.css'
 
 class AssignButton extends Component {
     render() {
+        //don't render assignment button until the user has set assignment dates, athlete, and workout
         if (!this.props.dayEnd ||
             !this.props.dayStart || 
             !this.props.monthEnd ||
