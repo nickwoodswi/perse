@@ -980,7 +980,7 @@ class App extends Component {
       <>
       <header>
         <div className='header'><h1>PERSE</h1></div>
-        <img id="app-logo" src={require('./images/hanging-knee-raises-crossfit-silhouette.png')} />
+        <img id="app-logo" src={require('./images/hanging-knee-raises-crossfit-silhouette.png')} alt="chinup-silhouette"/>
       </header>
       <nav>
         <NavLink to='/'><div className='nav-button'>ABOUT</div></NavLink>
