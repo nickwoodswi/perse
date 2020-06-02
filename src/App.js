@@ -639,6 +639,7 @@ class App extends Component {
     //if the start date is the same as the end date, push just the single date into the list of assignment dates
     if (startDate === endDate) {
       dates.push(startDate)
+      console.log(startDate, endDate)
     } else {
 
         //Create array of all dates in range
@@ -651,14 +652,16 @@ class App extends Component {
 
         //Create array of all dates in recurrance
         let workoutDates = []
-        for (let i = 0; i <= dateRange.length; i+=this.state.recurrance) {
+        for (let i = 0; i < dateRange.length; i+=parseInt(this.state.recurrance)) {
             workoutDates.push(dateRange[i])
         }
 
         let filteredWorkoutDates = workoutDates.filter(function(x) {
           return x !== undefined;
         })
-
+        console.log(filteredWorkoutDates)
+          console.log(workoutDates)
+          console.log(dateRange)
         this.setState({workout_dates: filteredWorkoutDates})
 
       }
@@ -796,7 +799,7 @@ class App extends Component {
     }
 
     //create an assignment entry for each date in the workout_dates array in state
-
+    console.log(this.state.workout_dates)
     let newAssignments = this.state.workout_dates.map(workoutDate => {
 
       if ((workoutDate.getTime() - new Date()) < 0) {
