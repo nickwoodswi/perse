@@ -179,8 +179,14 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      this.setState({ assignments: data })
+      const sorted = data.sort(function(a, b){
+        return new Date(a.perform_on_date) - new Date(b.perform_on_date)
+      })
+      this.setState({assignments: sorted})
     })
+    // .then(data => {
+    //   this.setState({ assignments: data })
+    // })
 
   }
 
