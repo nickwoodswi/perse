@@ -1141,6 +1141,7 @@ class App extends Component {
               <div className="rep-type">
                 <div className="set-reps">
                   <h4>Rep Type:</h4>
+                    <label htmlFor="rep-type">Rep Type</label>
                     <select id="rep-type" onChange={e => this.setState({ rep_type: e.target.value })}>
                       <option>Select Rep Type</option>
                       <option>TO FAILURE</option>
@@ -1153,31 +1154,34 @@ class App extends Component {
               </div>
               <div className="rep-spec">
                 <div className="add-weight">
-                  <h4>Add Weight (kg):</h4><input id="weight-number" type="number" value={this.state.weight} placeholder="60" onChange={e => this.setState({ weight: e.target.value })} />
+                  <h4>Add Weight (kg):</h4><label htmlFor="weight-number">Add Weight</label><input id="weight-number" type="number" value={this.state.weight} placeholder="60" onChange={e => this.setState({ weight: e.target.value })} />
                 </div>
                 <div className="rep-distance">
-                  <h4>Sub Distance (m):</h4><input id="rep-distance" type="number" value={this.state.distance} placeholder="400" onChange={e => this.setState({ sub_distance: e.target.value })} />
+                  <h4>Sub Distance (m):</h4><label htmlFor="rep-distance">Sub Distance</label><input id="rep-distance" type="number" value={this.state.distance} placeholder="400" onChange={e => this.setState({ sub_distance: e.target.value })} />
                 </div>
                 <div className="intensity-spec">
                   <div className="tempo-spec">
                     <h4>Tempo (reps/time):</h4>
-                      <select className="intensity-time-selector" onChange={e => this.setState({ tempo_unit: e.target.value })}>
+                      <label htmlFor="tempo-type-selector">Tempo</label>
+                      <select id="tempo-type-selector" className="intensity-time-selector" onChange={e => this.setState({ tempo_unit: e.target.value })}>
                         <option>NONE</option>
                         <option>Sec</option>
                         <option>Minute</option>
                         <option>Hour</option>
                       </select>
-                      <input className="intensity-time-input" type="number" value={this.state.tempo_time} placeholder="10" onChange={e => this.setState({ tempo_time: e.target.value })} />
+                      <label htmlFor="time-input">Tempo Input</label><input id="time-input" className="intensity-time-input" type="number" value={this.state.tempo_time} placeholder="10" onChange={e => this.setState({ tempo_time: e.target.value })} />
                   </div>
                   <div className="subrest-spec">
                     <h4>Sub Rest (sec):</h4>
-                      <select className="intensity-time-selector" onChange={e => this.setState({ subrest_unit: e.target.value })}>
+                      <label htmlFor="subrest-type-selector">Sub Rest</label>
+                      <select id="subrest-type-selector" className="intensity-time-selector" onChange={e => this.setState({ subrest_unit: e.target.value })}>
                         <option>NONE</option>
                         <option>Sec</option>
                         <option>Minute</option>
                         <option>Hour</option>
                       </select>
-                    <input className="intensity-time-input" type="number" value={this.state.subrest_time} placeholder="10" onChange={e => this.setState({ subrest_time: e.target.value })} />
+                    <label htmlFor="time-input">Sub Rest Time</label>
+                    <input id="time-input" className="intensity-time-input" type="number" value={this.state.subrest_time} placeholder="10" onChange={e => this.setState({ subrest_time: e.target.value })} />
                   </div>
                 </div>
               </div>
@@ -1185,13 +1189,15 @@ class App extends Component {
               <div className="rest-spec">
                 <div className="rest-editor">
                   <div className="rest-spec-header-container"><h3>Rest:</h3></div>
-                  <select className="rest-selector" onChange={e => this.setState({ rest_unit: e.target.value })}>
+                  <label htmlFor="rest-selector">Rest Selector</label>
+                  <select id="rest-selector" className="rest-selector" onChange={e => this.setState({ rest_unit: e.target.value })}>
                     <option>NONE</option>
                     <option>Sec</option>
                     <option>Minute</option>
                     <option>Hour</option>
                   </select>
-                  <input className="rest-input" type="number" value={this.state.rest_time} placeholder="10" onChange={e => this.setState({ rest_time: e.target.value })} />
+                  <label htmlFor="add-rest">Add Rest</label>
+                  <input id="add-rest" className="rest-input" type="number" value={this.state.rest_time} placeholder="10" onChange={e => this.setState({ rest_time: e.target.value })} />
                 </div>
                 <a href="#sets"><button id="add-exercise-button" onClick={e => this.submitNewExercise()}>ADD EXERCISE</button></a>
               </div>

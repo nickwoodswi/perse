@@ -11,7 +11,8 @@ class WorkoutSelection extends Component {
             return(
                 <>
                 <div className="select-workout-type">
-                    <select className="workout-selector" onChange={e => this.props.updateWorkout(e.target.value)}>
+                    <label htmlFor="workout-selector">Select A Workout</label>
+                    <select id="workout-selector" className="workout-selector" onChange={e => this.props.updateWorkout(e.target.value)}>
                         <option>SELECT WORKOUT</option>
                         {this.props.selectorOptions.map((option, idx) => {
                             return(
@@ -31,6 +32,7 @@ class WorkoutSelection extends Component {
             return(
                 <>
                 <div className="select-workout-type">
+                    <label htmlFor="workout-name-input">Name Workout</label>
                     <input 
                         onChange={e => this.props.define(e.target.value)}
                         id="workout-name-input" 

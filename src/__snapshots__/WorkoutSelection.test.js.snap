@@ -4,8 +4,14 @@ exports[`WorkoutSelection renders the UI as expected 1`] = `
 <div
   className="select-workout-type"
 >
+  <label
+    htmlFor="workout-selector"
+  >
+    Select A Workout
+  </label>
   <select
     className="workout-selector"
+    id="workout-selector"
     onChange={[Function]}
   >
     <option>

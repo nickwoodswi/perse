@@ -1,9 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AddSets component renders the UI as expected 1`] = `
-<input
-  className="set-number-input"
-  onChange={[Function]}
-  type="number"
-/>
+Array [
+  <label
+    htmlFor="set-number-input"
+  >
+    Number of Sets
+  </label>,
+  <input
+    className="set-number-input"
+    id="set-number-input"
+    onChange={[Function]}
+    type="number"
+  />,
+]
 `;

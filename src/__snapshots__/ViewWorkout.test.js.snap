@@ -11,8 +11,14 @@ exports[`ViewWorkout renders the UI as expected 1`] = `
       VIEW SCHEDULED WORKOUTS BY ATHLETE:
     </h2>
   </div>
+  <label
+    htmlFor="view-workouts-by-athlete"
+  >
+    Select Athlete to View
+  </label>
   <select
     className="athlete-selector"
+    id="view-workouts-by-athlete"
     onChange={[Function]}
   >
     <option>

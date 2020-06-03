@@ -10,8 +10,14 @@ Array [
   <div
     className="recurrence-selector"
   >
+    <label
+      htmlFor="recurrence-selector"
+    >
+      Select Recurrence
+    </label>
     <select
       className="recurrence-selector"
+      id="recurrence-selector"
       onChange={[Function]}
     >
       <option
@@ -52,8 +58,14 @@ Array [
     <div
       className="date-selector"
     >
+      <label
+        htmlFor="start-month-selector"
+      >
+        Select Start Month
+      </label>
       <select
         className="month-selector"
+        id="start-month-selector"
         onChange={[Function]}
       >
         <option>
@@ -96,12 +108,24 @@ Array [
           December
         </option>
       </select>
+      <label
+        htmlFor="start-day-selector"
+      >
+        Select Start Day
+      </label>
       <select
         className="day-selector"
+        id="start-day-selector"
         onChange={[Function]}
       />
+      <label
+        htmlFor="start-year-selector"
+      >
+        Select Start Year
+      </label>
       <select
         className="year-selector"
+        id="start-year-selector"
         onChange={[Function]}
       >
         <option>
@@ -123,8 +147,14 @@ Array [
     <div
       className="date-selector"
     >
+      <label
+        htmlFor="end-month-selector"
+      >
+        Select End Month
+      </label>
       <select
         className="month-selector"
+        id="end-month-selector"
         onChange={[Function]}
       >
         <option>
@@ -167,12 +197,24 @@ Array [
           December
         </option>
       </select>
+      <label
+        htmlFor="end-day-selector"
+      >
+        Select End Day
+      </label>
       <select
         className="day-selector"
+        id="end-day-selector"
         onChange={[Function]}
       />
+      <label
+        htmlFor="end-year-selector"
+      >
+        Select End Year
+      </label>
       <select
         className="year-selector"
+        id="end-year-selector"
         onChange={[Function]}
       >
         <option>

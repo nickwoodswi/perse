@@ -11,7 +11,9 @@ class ViewWorkout extends Component {
         return(
             <div className="view-workouts">
                 <div className="view-workouts-headline"><h2>VIEW SCHEDULED WORKOUTS BY ATHLETE:</h2></div>
+                <label htmlFor="view-workouts-by-athlete">Select Athlete to View</label>
                 <select 
+                    id="view-workouts-by-athlete"
                     className="athlete-selector" 
                     onChange={e => this.props.changeAthleteView(e.target.options[e.target.selectedIndex].value)}>
                         <option>SELECT ATHLETE</option>

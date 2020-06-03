@@ -4,8 +4,14 @@ exports[`SingleDateSelector renders the UI as expected 1`] = `
 <div
   className="date-selector"
 >
+  <label
+    htmlFor="start-month-selector"
+  >
+    Select Month
+  </label>
   <select
     className="month-selector"
+    id="start-month-selector"
     onChange={[Function]}
   >
     <option>
@@ -48,12 +54,24 @@ exports[`SingleDateSelector renders the UI as expected 1`] = `
       December
     </option>
   </select>
+  <label
+    htmlFor="start-day-selector"
+  >
+    Select Start Day
+  </label>
   <select
     className="day-selector"
+    id="start-day-selector"
     onChange={[Function]}
   />
+  <label
+    htmlFor="start-year-selector"
+  >
+    Select Start Year
+  </label>
   <select
     className="year-selector"
+    id="start-year-selector"
     onChange={[Function]}
   >
     <option>

@@ -7,10 +7,13 @@ class AddSets extends Component {
       }
     render() {
         return(
-            <input className="set-number-input"
+            <>
+            <label htmlFor="set-number-input">Number of Sets</label>
+            <input id="set-number-input" className="set-number-input"
                 type="number" 
                 value={this.props.targetSet.set_num}
                 onChange={e => this.props.addSets(this.props.setId, this.props.targetSet, e.target.value)}/>
+            </>
         )
     }
 }

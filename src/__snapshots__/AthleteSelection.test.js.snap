@@ -4,8 +4,14 @@ exports[`AthleteSelection renders the UI as expected 1`] = `
 <div
   className="assignment-type"
 >
+  <label
+    htmlFor="athlete-selector"
+  >
+    Select Athlete For Assignment
+  </label>
   <select
     className="athlete-selector"
+    id="athlete-selector"
     onChange={[Function]}
   >
     <option>

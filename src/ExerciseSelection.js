@@ -9,7 +9,9 @@ class ExerciseSelection extends Component {
     render() {
         if (this.props.type === 'select') {
             return(
-                <select className="exercise-selector" onChange={this.props.setSelectionAsExercise}>
+                <>
+                <label htmlFor="exercise-selector">Select Exercise</label>
+                <select id="exercise-selector" className="exercise-selector" onChange={this.props.setSelectionAsExercise}>
                     <option>SELECT EXERCISE</option>
                     {this.props.selectorOptions.map((option, idx) => {
                         return(
@@ -17,10 +19,13 @@ class ExerciseSelection extends Component {
                         )
                     })}
                 </select>
+                </>
             )
         }
         if (this.props.type === 'create') {
             return(
+                <>
+                <label htmlFor="ex-name-input">Add Exercise</label>
                 <input 
                     className='exercise-selector'
                     onChange={this.props.define}
@@ -28,6 +33,7 @@ class ExerciseSelection extends Component {
                     type="text" 
                     value={this.props.name} 
                     placeholder="New Exercise Name" />
+                </>
             )
         }
     }
