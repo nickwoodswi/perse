@@ -97,9 +97,11 @@ class App extends Component {
     // // this.setState({ex_selector: ExerciseTypes})
     // // this.setState({exercises: Exercises})
     // // this.setState({join: Join})
-
+    this.updateData()
   //fetches
-
+    }
+    
+    updateData = () => {
     //gets previously-entered athletes (id, name) from the database and puts them in state
       //used to make assignments
     fetch(`${API_URL}/athletes`, {
@@ -645,7 +647,6 @@ class App extends Component {
     //if the start date is the same as the end date, push just the single date into the list of assignment dates
     if (startDate === endDate) {
       dates.push(startDate)
-      console.log(startDate, endDate)
     } else {
 
         //Create array of all dates in range
@@ -665,9 +666,7 @@ class App extends Component {
         let filteredWorkoutDates = workoutDates.filter(function(x) {
           return x !== undefined;
         })
-        console.log(filteredWorkoutDates)
-          console.log(workoutDates)
-          console.log(dateRange)
+
         this.setState({workout_dates: filteredWorkoutDates})
 
       }
@@ -805,7 +804,7 @@ class App extends Component {
     }
 
     //create an assignment entry for each date in the workout_dates array in state
-    console.log(this.state.workout_dates)
+
     let newAssignments = this.state.workout_dates.map(workoutDate => {
 
       if ((workoutDate.getTime() - new Date()) < 0) {
@@ -823,43 +822,45 @@ class App extends Component {
       return assignment
       
     })
-    this.setState({assignments: [...this.state.assignments, ...newAssignments]})
 
     // uncomment to use static data for testing
+
+    // this.setState({assignments: [...this.state.assignments, ...newAssignments]})
 
     // // //static
     // // newAthletePost.map(athlete => {
     // //   this.setState({athletes: [...this.state.athletes, athlete]})
     // // })
-    
     //post any new athletes
-    newAthletePost.map(athlete => {
-      fetch(`${API_URL}/athletes`, {
-        method: 'POST',
-        body: JSON.stringify(athlete),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then(response => response.json())
-    })
+    let promises = []
+    promises = promises.concat(
 
+      newAthletePost.map(athlete => 
+        fetch(`${API_URL}/athletes`, {
+          method: 'POST',
+          body: JSON.stringify(athlete),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then(response => response.json())
+      ),
     // //static
     // newWorkoutPost.map(workout => {
     //   this.setState({workouts: [...this.state.workouts, workout]})
     // })
 
     //post an new workouts
-    newWorkoutPost.map(workout => {
-      fetch(`${API_URL}/workouts`, {
-        method: 'POST',
-        body: JSON.stringify(workout),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then(response => response.json())
-    })
+      newWorkoutPost.map(workout => 
+        fetch(`${API_URL}/workouts`, {
+          method: 'POST',
+          body: JSON.stringify(workout),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then(response => response.json())
+      ),
 
     // //static
     // newJoinEntries.map(entry => {
@@ -867,16 +868,16 @@ class App extends Component {
     // })
     
     //post join entries
-    newJoinEntries.map(entry => {
-      fetch(`${API_URL}/join`, {
-        method: 'POST',
-        body: JSON.stringify(entry),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then(response => response.json())
-    })
+      newJoinEntries.map(entry => 
+        fetch(`${API_URL}/join`, {
+          method: 'POST',
+          body: JSON.stringify(entry),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then(response => response.json())
+      ),
 
     // //static
     // newExercises.map(exercise => {
@@ -884,16 +885,16 @@ class App extends Component {
     // })
     
     //post new exercises
-    newExercises.map(exercise => {
-      fetch(`${API_URL}/exercises`, {
-        method: 'POST',
-        body: JSON.stringify(exercise),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then(response => response.json())
-    })
+      newExercises.map(exercise => 
+        fetch(`${API_URL}/exercises`, {
+          method: 'POST',
+          body: JSON.stringify(exercise),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then(response => response.json())
+      ),
 
     // //static
     // newAssignments.map(assignment => {
@@ -901,16 +902,16 @@ class App extends Component {
     // })
 
     //post new assignments
-    newAssignments.map(assignment => {
-      fetch(`${API_URL}/assignments`, {
-        method: 'POST',
-        body: JSON.stringify(assignment),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then(response => response.json())
-    })
+      newAssignments.map(assignment => 
+        fetch(`${API_URL}/assignments`, {
+          method: 'POST',
+          body: JSON.stringify(assignment),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then(response => response.json())
+      ),
 
     // //static
     // newExerciseTypes.map(type => {
@@ -918,60 +919,64 @@ class App extends Component {
     // })
 
     //post new exercise types
-    newExerciseTypes.map(type => {
-      fetch(`${API_URL}/exercise-types`, {
-        method: 'POST',
-        body: JSON.stringify(type),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then(response => response.json())
-      //reset state after submission
-      .then(this.setState({
+      newExerciseTypes.map(type => 
+        fetch(`${API_URL}/exercise-types`, {
+          method: 'POST',
+          body: JSON.stringify(type),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then(response => response.json())
+        //reset state after submission
+        .then(this.setState({
 
-         //workout
-         workout_selection_type: 'select',
-         workout_name: '',
-         selected_workout_id: '',
-         sets: [],
+          //workout
+          workout_selection_type: 'select',
+          workout_name: '',
+          selected_workout_id: '',
+          sets: [],
 
-         //athlete
-         assign_athlete_type: 'select',
-         selected_athlete_firstname: '',
-         selected_athlete_lastname: '',
-         selected_athlete_id: '',
+          //athlete
+          assign_athlete_type: 'select',
+          selected_athlete_firstname: '',
+          selected_athlete_lastname: '',
+          selected_athlete_id: '',
 
-         //exercises
-         add_exercise_type: 'select',
-         ex_name: '',
-         selected_exercise_type_id: '',
-         rep_type: 'TO FAILURE',
-         reps: '',
-         weight: '',
-         sub_distance: '',
-         tempo_unit: '',
-         tempo_time: '',
-         subrest_unit: '',
-         subrest_time: '',
-         rest_unit: '',
-         rest_time: '',
+          //exercises
+          add_exercise_type: 'select',
+          ex_name: '',
+          selected_exercise_type_id: '',
+          rep_type: 'TO FAILURE',
+          reps: '',
+          weight: '',
+          sub_distance: '',
+          tempo_unit: '',
+          tempo_time: '',
+          subrest_unit: '',
+          subrest_time: '',
+          rest_unit: '',
+          rest_time: '',
 
-         //dates
-         month_start: 'January',
-         day_start: '1',
-         year_start: '2020',
-         month_end: 'January',
-         day_end: '1',
-         year_end: '2020',
-         recurrance: 1,
-         workout_dates: [new Date(2020, 0, 1)],
+          //dates
+          month_start: 'January',
+          day_start: '1',
+          year_start: '2020',
+          month_end: 'January',
+          day_end: '1',
+          year_end: '2020',
+          recurrance: 1,
+          workout_dates: [new Date(2020, 0, 1)],
 
-         //view
-         viewing_athlete_id: ''
-      }))
+          //view
+          viewing_athlete_id: ''
+        }))
+      )
+    )
+    Promise.all(promises)
+    .then(data => {
+      window.location.href="/view-workouts"
     })
-      
 
   }
 
@@ -1216,7 +1221,8 @@ class App extends Component {
             join={this.state.join}
             assignments={this.state.assignments} 
             viewingAthleteId={this.state.viewing_athlete_id}
-            changeAthleteView={this.changeAthleteView} />
+            changeAthleteView={this.changeAthleteView}
+            updateData={this.updateData} />
         </main>
       </Route>
       </>

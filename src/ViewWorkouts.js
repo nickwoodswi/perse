@@ -7,6 +7,7 @@ class ViewWorkout extends Component {
         athletes: [],
         assignments: []
       }
+
     render() {
         return(
             <div className="view-workouts">
