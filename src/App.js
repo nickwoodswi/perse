@@ -414,6 +414,11 @@ class App extends Component {
       alert('No exercise selected or created!')
       return
     }
+
+    if (this.state.selected_exercise_type_id == 'SELECT EXERCISE') {
+      alert('No exercise selected!')
+      return
+    }
     
     if (this.state.add_exercise_type === 'create') {
       if (!this.state.ex_name) {
@@ -436,30 +441,6 @@ class App extends Component {
       }
     } else {this.convertTempoToSec()}
 
-    if (this.state.add_exercise_type === 'select') {
-      if (this.state.selected_exercise_type_id == 'SELECT EXERCISE') {
-        alert('No exercise selected!')
-        return
-      }
-      if (!this.state.selected_exercise_type_id) {
-        alert('No exercise selected!')
-        return
-      }
-      else {
-        let newExerciseType = {
-          exercise_types_id: this.state.selected_exercise_type_id,
-          exercise_types_name: this.state.ex_name,
-          new_exercise_type: 'new'
-        }
-        
-        this.setState( 
-          { ex_selector: [...this.state.ex_selector, newExerciseType] }, 
-          this.setState({ add_exercise_type: 'select', selected_exercise_type_id: '', workout_selection_type: 'create'}) 
-        )
-        
-        this.convertTempoToSec()
-      }
-    }
   }
 
   //converts minutes/hours to seconds if selected for tempo, subrest, and rest
@@ -510,18 +491,18 @@ class App extends Component {
         }
       this.setState({
         sets: [...this.state.sets, set],
-        ex_name: '',
-        selected_exercise_id: '',
-        rep_type: '',
-        reps: '',
-        weight: '',
-        sub_distance: '',
-        tempo_unit: '',
-        tempo_time: '',
-        subrest_unit: '',
-        subrest_time: '',
-        rest_unit: '',
-        rest_time: ''
+        // ex_name: '',
+        // selected_exercise_type_id: '',
+        // rep_type: '',
+        // reps: '',
+        // weight: '',
+        // sub_distance: '',
+        // tempo_unit: '',
+        // tempo_time: '',
+        // subrest_unit: '',
+        // subrest_time: '',
+        // rest_unit: '',
+        // rest_time: ''
       })
     }
 
@@ -541,18 +522,18 @@ class App extends Component {
         }
       this.setState({
         sets: [...this.state.sets, set],
-        ex_name: '',
-        selected_exercise_id: '',
-        rep_type: '',
-        reps: '',
-        weight: '',
-        sub_distance: '',
-        tempo_unit: '',
-        tempo_time: '',
-        subrest_unit: '',
-        subrest_time: '',
-        rest_unit: '',
-        rest_time: ''
+        // ex_name: '',
+        // selected_exercise_id: '',
+        // rep_type: '',
+        // reps: '',
+        // weight: '',
+        // sub_distance: '',
+        // tempo_unit: '',
+        // tempo_time: '',
+        // subrest_unit: '',
+        // subrest_time: '',
+        // rest_unit: '',
+        // rest_time: ''
       })
     }
     if (this.state.rest_unit == 'Hour') {
@@ -571,18 +552,18 @@ class App extends Component {
         }
       this.setState({
         sets: [...this.state.sets, set],
-        ex_name: '',
-        selected_exercise_id: '',
-        rep_type: 'TO FAILURE',
-        reps: 1,
-        weight: '',
-        sub_distance: '',
-        tempo_unit: '',
-        tempo_time: '',
-        subrest_unit: '',
-        subrest_time: '',
-        rest_unit: '',
-        rest_time: ''
+        // ex_name: '',
+        // selected_exercise_id: '',
+        // rep_type: 'TO FAILURE',
+        // reps: 1,
+        // weight: '',
+        // sub_distance: '',
+        // tempo_unit: '',
+        // tempo_time: '',
+        // subrest_unit: '',
+        // subrest_time: '',
+        // rest_unit: '',
+        // rest_time: ''
       })
     }
   }
