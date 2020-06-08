@@ -100,7 +100,7 @@ class App extends Component {
     this.updateData()
   //fetches
     }
-    
+
     updateData = () => {
     //gets previously-entered athletes (id, name) from the database and puts them in state
       //used to make assignments
@@ -414,11 +414,6 @@ class App extends Component {
       alert('No exercise selected or created!')
       return
     }
-
-    if (this.state.selected_exercise_type_id == 'SELECT EXERCISE') {
-      alert('No exercise selected!')
-      return
-    }
     
     if (this.state.add_exercise_type === 'create') {
       if (!this.state.ex_name) {
@@ -440,6 +435,31 @@ class App extends Component {
 
       }
     } else {this.convertTempoToSec()}
+
+    if (this.state.add_exercise_type === 'select') {
+      if (this.state.selected_exercise_type_id == 'SELECT EXERCISE') {
+        alert('No exercise selected!')
+        return
+      }
+      if (!this.state.selected_exercise_type_id) {
+        alert('No exercise selected!')
+        return
+      }
+      else {
+        let newExerciseType = {
+          exercise_types_id: this.state.selected_exercise_type_id,
+          exercise_types_name: this.state.ex_name,
+          new_exercise_type: 'new'
+        }
+        
+        this.setState( 
+          { ex_selector: [...this.state.ex_selector, newExerciseType] }, 
+          this.setState({ add_exercise_type: 'select', selected_exercise_type_id: '', workout_selection_type: 'create'}) 
+        )
+        
+        this.convertTempoToSec()
+      }
+    }
   }
 
   //converts minutes/hours to seconds if selected for tempo, subrest, and rest
@@ -771,38 +791,39 @@ class App extends Component {
     
     let newExercises = []
     let newJoinEntries = []
-    if (!this.state.sets) {
-      return alert('No exercise specified!')
-    } else {
-      this.state.sets.map(set => {
+    if (this.state.workout_selection_type == 'create') {
+      if (!this.state.sets) {
+        return alert('No exercise specified!')
+      } else {
+        this.state.sets.map(set => {
 
-        let exercisesId = uuid()
+          let exercisesId = uuid()
 
-        let exercise = {
-          exercises_id: exercisesId,
-          exercise_types_id: set.exercise_types_id,
-          rep_type: set.rep_type,
-          reps: set.reps,
-          resistance: set.weight,
-          sub_distance: set.sub_distance,
-          tempo: set.tempo_time,
-          subrest: set.subrest_time,
-          rest: set.rest_time,
-          set_num: set.set_num,
-          set_order: this.state.sets.indexOf(set)
-        }
-        newExercises.push(exercise)
-        
-        let joinEntry = {
-          id: uuid(),
-          workouts_id: this.state.selected_workout_id,
-          exercises_id: exercisesId
-        }
-        newJoinEntries.push(joinEntry)
+          let exercise = {
+            exercises_id: exercisesId,
+            exercise_types_id: set.exercise_types_id,
+            rep_type: set.rep_type,
+            reps: set.reps,
+            resistance: set.weight,
+            sub_distance: set.sub_distance,
+            tempo: set.tempo_time,
+            subrest: set.subrest_time,
+            rest: set.rest_time,
+            set_num: set.set_num,
+            set_order: this.state.sets.indexOf(set)
+          }
+          newExercises.push(exercise)
+          
+          let joinEntry = {
+            id: uuid(),
+            workouts_id: this.state.selected_workout_id,
+            exercises_id: exercisesId
+          }
+          newJoinEntries.push(joinEntry)
 
-      })
+        })
+      }
     }
-
     //create an assignment entry for each date in the workout_dates array in state
 
     let newAssignments = this.state.workout_dates.map(workoutDate => {
