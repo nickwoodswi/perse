@@ -825,6 +825,14 @@ class App extends Component {
       
     })
 
+    postData(
+      newAthletePost, 
+      newWorkoutPost, 
+      newJoinEntries, 
+      newExercises, 
+      newAssignments, 
+      newExerciseTypes)
+
     // uncomment to use static data for testing
 
     // this.setState({assignments: [...this.state.assignments, ...newAssignments]})
@@ -834,152 +842,161 @@ class App extends Component {
     // //   this.setState({athletes: [...this.state.athletes, athlete]})
     // // })
     //post any new athletes
-    let promises = []
-    promises = promises.concat(
 
-      newAthletePost.map(athlete => 
-        fetch(`${API_URL}/athletes`, {
-          method: 'POST',
-          body: JSON.stringify(athlete),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then(response => response.json())
-      ),
-    // //static
-    // newWorkoutPost.map(workout => {
-    //   this.setState({workouts: [...this.state.workouts, workout]})
-    // })
+  }
 
-    //post an new workouts
-      newWorkoutPost.map(workout => 
-        fetch(`${API_URL}/workouts`, {
-          method: 'POST',
-          body: JSON.stringify(workout),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then(response => response.json())
-      ),
-
-    // //static
-    // newJoinEntries.map(entry => {
-    //   this.setState({join: [...this.state.join, entry]})
-    // })
-    
-    //post join entries
-      newJoinEntries.map(entry => 
-        fetch(`${API_URL}/join`, {
-          method: 'POST',
-          body: JSON.stringify(entry),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then(response => response.json())
-      ),
-
-    // //static
-    // newExercises.map(exercise => {
-    //   this.setState({exercises: [...this.state.exercises, exercise]})
-    // })
-    
-    //post new exercises
-      newExercises.map(exercise => 
-        fetch(`${API_URL}/exercises`, {
-          method: 'POST',
-          body: JSON.stringify(exercise),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then(response => response.json())
-      ),
-
-    // //static
-    // newAssignments.map(assignment => {
-    //   this.setState({assignments: [...this.state.assignments, assignment]})
-    // })
-
-    //post new assignments
-      newAssignments.map(assignment => 
-        fetch(`${API_URL}/assignments`, {
-          method: 'POST',
-          body: JSON.stringify(assignment),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then(response => response.json())
-      ),
-
-    // //static
-    // newExerciseTypes.map(type => {
-    //   this.setState({ex_selector: [...this.state.ex_selector, type]})
-    // })
-
-    //post new exercise types
-      newExerciseTypes.map(type => 
-        fetch(`${API_URL}/exercise-types`, {
-          method: 'POST',
-          body: JSON.stringify(type),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then(response => response.json())
-        //reset state after submission
-        .then(this.setState({
-
-          //workout
-          workout_selection_type: 'select',
-          workout_name: '',
-          selected_workout_id: '',
-          sets: [],
-
-          //athlete
-          assign_athlete_type: 'select',
-          selected_athlete_firstname: '',
-          selected_athlete_lastname: '',
-          selected_athlete_id: '',
-
-          //exercises
-          add_exercise_type: 'select',
-          ex_name: '',
-          selected_exercise_type_id: '',
-          rep_type: 'TO FAILURE',
-          reps: '',
-          weight: '',
-          sub_distance: '',
-          tempo_unit: '',
-          tempo_time: '',
-          subrest_unit: '',
-          subrest_time: '',
-          rest_unit: '',
-          rest_time: '',
-
-          //dates
-          month_start: 'January',
-          day_start: '1',
-          year_start: '2020',
-          month_end: 'January',
-          day_end: '1',
-          year_end: '2020',
-          recurrance: 1,
-          workout_dates: [new Date(2020, 0, 1)],
-
-          //view
-          viewing_athlete_id: ''
-        }))
+  postData(
+    newAthletePost, 
+    newWorkoutPost, 
+    newJoinEntries, 
+    newExercises, 
+    newAssignments, 
+    newExerciseTypes) {
+      let promises = []
+      promises = promises.concat(
+  
+        newAthletePost.map(athlete => 
+          fetch(`${API_URL}/athletes`, {
+            method: 'POST',
+            body: JSON.stringify(athlete),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then(response => response.json())
+        ),
+      // //static
+      // newWorkoutPost.map(workout => {
+      //   this.setState({workouts: [...this.state.workouts, workout]})
+      // })
+  
+      //post any new workouts
+        newWorkoutPost.map(workout => 
+          fetch(`${API_URL}/workouts`, {
+            method: 'POST',
+            body: JSON.stringify(workout),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then(response => response.json())
+        ),
+  
+      // //static
+      // newJoinEntries.map(entry => {
+      //   this.setState({join: [...this.state.join, entry]})
+      // })
+      
+      //post join entries
+        newJoinEntries.map(entry => 
+          fetch(`${API_URL}/join`, {
+            method: 'POST',
+            body: JSON.stringify(entry),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then(response => response.json())
+        ),
+  
+      // //static
+      // newExercises.map(exercise => {
+      //   this.setState({exercises: [...this.state.exercises, exercise]})
+      // })
+      
+      //post new exercises
+        newExercises.map(exercise => 
+          fetch(`${API_URL}/exercises`, {
+            method: 'POST',
+            body: JSON.stringify(exercise),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then(response => response.json())
+        ),
+  
+      // //static
+      // newAssignments.map(assignment => {
+      //   this.setState({assignments: [...this.state.assignments, assignment]})
+      // })
+  
+      //post new assignments
+        newAssignments.map(assignment => 
+          fetch(`${API_URL}/assignments`, {
+            method: 'POST',
+            body: JSON.stringify(assignment),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then(response => response.json())
+        ),
+  
+      // //static
+      // newExerciseTypes.map(type => {
+      //   this.setState({ex_selector: [...this.state.ex_selector, type]})
+      // })
+  
+      //post new exercise types
+        newExerciseTypes.map(type => 
+          fetch(`${API_URL}/exercise-types`, {
+            method: 'POST',
+            body: JSON.stringify(type),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then(response => response.json())
+          //reset state after submission
+          .then(this.setState({
+  
+            //workout
+            workout_selection_type: 'select',
+            workout_name: '',
+            selected_workout_id: '',
+            sets: [],
+  
+            //athlete
+            assign_athlete_type: 'select',
+            selected_athlete_firstname: '',
+            selected_athlete_lastname: '',
+            selected_athlete_id: '',
+  
+            //exercises
+            add_exercise_type: 'select',
+            ex_name: '',
+            selected_exercise_type_id: '',
+            rep_type: 'TO FAILURE',
+            reps: '',
+            weight: '',
+            sub_distance: '',
+            tempo_unit: '',
+            tempo_time: '',
+            subrest_unit: '',
+            subrest_time: '',
+            rest_unit: '',
+            rest_time: '',
+  
+            //dates
+            month_start: 'January',
+            day_start: '1',
+            year_start: '2020',
+            month_end: 'January',
+            day_end: '1',
+            year_end: '2020',
+            recurrance: 1,
+            workout_dates: [new Date(2020, 0, 1)],
+  
+            //view
+            viewing_athlete_id: ''
+          }))
+        )
       )
-    )
-    Promise.all(promises)
-    .then(data => {
-      window.location.href="/view-workouts"
-    })
-
+      Promise.all(promises)
+      .then(data => {
+        window.location.href="/view-workouts"
+      })
   }
 
   render() {
