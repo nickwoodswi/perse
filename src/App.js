@@ -714,6 +714,8 @@ class App extends Component {
       return
     }
 
+
+
     //exercises in the workout are required
     if (this.state.sets.length == 0) {
       alert('No exercises selected!')
@@ -809,29 +811,33 @@ class App extends Component {
 
     let newAssignments = this.state.workout_dates.map(workoutDate => {
 
-      if ((workoutDate.getTime() - new Date()) < 0) {
-        alert('One or more of your assignment dates is in the past!')
-        return
+      if ((workoutDate.getTime() - new Date()) >= 0) {
+        let assignment = {
+          id: uuid(),
+          date_assigned: new Date(),
+          perform_on_date: workoutDate,
+          athletes_id: this.state.selected_athlete_id,
+          workouts_id: this.state.selected_workout_id
+        }
+        return assignment
       }
-
-      let assignment = {
-        id: uuid(),
-        date_assigned: new Date(),
-        perform_on_date: workoutDate,
-        athletes_id: this.state.selected_athlete_id,
-        workouts_id: this.state.selected_workout_id
-      }
-      return assignment
       
     })
 
-    postData(
-      newAthletePost, 
-      newWorkoutPost, 
-      newJoinEntries, 
-      newExercises, 
-      newAssignments, 
-      newExerciseTypes)
+    let filteredAssignments = newAssignments.filter(assignment => assignment !== undefined)
+
+    if (filteredAssignments.length == this.state.workout_dates.length) {
+      this.postData(
+        newAthletePost, 
+        newWorkoutPost, 
+        newJoinEntries, 
+        newExercises, 
+        newAssignments, 
+        newExerciseTypes)
+    } else { 
+      alert ('One or more of your workout dates is in the past!')
+      return
+    }
 
     // uncomment to use static data for testing
 
