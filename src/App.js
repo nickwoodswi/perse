@@ -1179,6 +1179,7 @@ class App extends Component {
                       <option>SINGLE DISTANCE (m)</option>
                       <option>TIME (min)</option>
                     </select>
+                    <label htmlFor="rep-number">Rep Number</label>
                     <input id="rep-number" type="number" value={this.state.reps} placeholder="10" onChange={e => this.setState({ reps: e.target.value })} />
                 </div>
               </div>
@@ -1199,7 +1200,7 @@ class App extends Component {
                         <option>Minute</option>
                         <option>Hour</option>
                       </select>
-                      <label htmlFor="time-input">Tempo Input</label><input id="time-input" className="intensity-time-input" type="number" value={this.state.tempo_time} placeholder="10" onChange={e => this.setState({ tempo_time: e.target.value })} />
+                      <label htmlFor="tempo-input">Tempo Input</label><input id="tempo-input" className="intensity-time-input" type="number" value={this.state.tempo_time} placeholder="10" onChange={e => this.setState({ tempo_time: e.target.value })} />
                   </div>
                   <div className="subrest-spec">
                     <h4>Sub Rest (sec):</h4>
@@ -1210,8 +1211,7 @@ class App extends Component {
                         <option>Minute</option>
                         <option>Hour</option>
                       </select>
-                    <label htmlFor="time-input">Sub Rest Time</label>
-                    <input id="time-input" className="intensity-time-input" type="number" value={this.state.subrest_time} placeholder="10" onChange={e => this.setState({ subrest_time: e.target.value })} />
+                      <label htmlFor="subrest-input">Sub Rest Time</label><input id="subrest-input" className="intensity-time-input" type="number" value={this.state.subrest_time} placeholder="10" onChange={e => this.setState({ subrest_time: e.target.value })} />
                   </div>
                 </div>
               </div>
